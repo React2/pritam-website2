@@ -1,0 +1,41 @@
+/** @format */
+
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { get_event } from "../../../Repo/Api";
+
+const Banner = () => {
+  const [event, setEvent] = useState([]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    get_event(setEvent);
+  }, []);
+
+  return (
+    <div className="Event_Booking-Banner Event-Booking-Banner">
+      <div className="upper" style={{ paddingTop: "20px" }}>
+        <h5>Event Booking</h5>
+        <p style={{ fontFamily: "Plus Jakarta Sans" }}>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras tempus
+          eleifend ullamcorper. Sed maximus nunc vitae metus pharetra, quis
+          pharetra felis iaculis. Aenean in nisl eget lorem congue efficitur id
+          ut orci. Mauris volutpat tortor non lectus rhoncus vestibulum bibendum
+          quis leo. Nulla lobortis feugiat nibh. Mauris pulvinar quam nec lectus
+          ornare, id auctor nulla venenatis
+        </p>
+      </div>
+      <div className="down">
+        <div className="main">
+          {event?.map((ele, i) => (
+            <>
+        
+            </>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Banner;
