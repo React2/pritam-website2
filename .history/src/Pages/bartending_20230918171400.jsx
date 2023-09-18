@@ -100,11 +100,9 @@ export default function Bartending() {
                 <BsArrowRightShort style={{ fontSize: "20px" }} />
               </p>
               <span className="open_Span">
-                <p className="desc">{i.description}</p>
+                <p className="desc">{i.description}</span>
                 <ul>
-                  {i.descriptionPoints?.map((item, index) => (
-                    <li key={index}> {item} </li>
-                  ))}
+                  <li>Standard Por</li>
                 </ul>
               </span>
             </div>

@@ -2835,11 +2835,10 @@
   top: 0;
   border-radius: 34px;
   background: #fff;
-  width: 400px;
-  height: 500px;
-  right: -10px;
+  width: 548px;
+  height: 702px;
+  right: 0;
   z-index: 222;
-  padding: 10px;
 }
 
 .contact-us-overflow-main .Content .Main .search .date-picker .close_icon {
@@ -2850,17 +2849,10 @@
   color: #000;
   text-align: center;
   font-family: Plus Jakarta Sans;
-  font-size: 20px;
+  font-size: 25px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
-}
-.contact-us-overflow-main .Content .Main .search .date-picker .close_icon i{
-  position: absolute;
-  right: 40px;
-  top: 5px;
-  font-size: 20px;
-  cursor: pointer;
 }
 .contact-us-overflow-main .Content .Main .search .date-picker .submit_button {
   max-width: 350px;

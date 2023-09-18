@@ -99,14 +99,7 @@ export default function Bartending() {
                 {i.title}
                 <BsArrowRightShort style={{ fontSize: "20px" }} />
               </p>
-              <span className="open_Span">
-                <p className="desc">{i.description}</p>
-                <ul>
-                  {i.descriptionPoints?.map((item, index) => (
-                    <li key={index}> {item} </li>
-                  ))}
-                </ul>
-              </span>
+              <span className="open_Span">{i.description}</span>
             </div>
           ))}
         </div>
@@ -161,7 +154,7 @@ export default function Bartending() {
                 <img src={i.image?.[0]} alt="" />
                 <p>{i.title} </p>
               </div>
-              <p className="desc">{i.description}</p>
+              <p className="desc">{i.description?.substr(0, 100)}</p>
 
               <div className="three-sec">
                 <i className="fa-solid fa-tag" />

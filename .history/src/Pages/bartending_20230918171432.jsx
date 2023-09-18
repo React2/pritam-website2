@@ -102,9 +102,10 @@ export default function Bartending() {
               <span className="open_Span">
                 <p className="desc">{i.description}</p>
                 <ul>
-                  {i.descriptionPoints?.map((item, index) => (
-                    <li key={index}> {item} </li>
-                  ))}
+                {i.descriptionPoints?.map((item , index) => (
+                  
+                ))}
+                  <li>Standard Por</li>
                 </ul>
               </span>
             </div>

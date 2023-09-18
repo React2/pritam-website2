@@ -19,18 +19,11 @@ export default function Bartending() {
   const [terms, setTerms] = useState([]);
   const [privacy, setPrivacy] = useState([]);
   const [showDatePicker, setShowDatePicker] = useState(false);
-  const [lastDate, setLastDate] = useState(null);
+  const [ lastDate  , setLastDate ] = useState(null)
 
-  const tillDate = lastDate === null ? "" : `${lastDate}T23:59:59.000Z`;
+  const tillDate =
+  lastDate === null || e.llastDatength < 5 ? '' : `${toDate}T23:59:59.000Z`;
 
-  function handleDateChange(e) {
-    const formattedDate = e.toISOString().split("T")[0];
-    setLastDate(formattedDate);
-  }
-
-  const fetchHandler = () => {
-    getCourse(setResponse, tillDate);
-  };
 
   const payload = {
     firstName,
@@ -56,13 +49,11 @@ export default function Bartending() {
   };
 
   useEffect(() => {
+    getCourse(setResponse);
     get_terms(setTerms);
     get_privacy(setPrivacy);
   }, []);
 
-  useEffect(() => {
-    fetchHandler();
-  }, []);
 
   return (
     <div>
@@ -99,14 +90,7 @@ export default function Bartending() {
                 {i.title}
                 <BsArrowRightShort style={{ fontSize: "20px" }} />
               </p>
-              <span className="open_Span">
-                <p className="desc">{i.description}</p>
-                <ul>
-                  {i.descriptionPoints?.map((item, index) => (
-                    <li key={index}> {item} </li>
-                  ))}
-                </ul>
-              </span>
+              <span className="open_Span">{i.description}</span>
             </div>
           ))}
         </div>
@@ -137,14 +121,9 @@ export default function Bartending() {
                         onClick={() => setShowDatePicker(false)}
                       ></i>
                     </div>
-                    <Calendar onChange={(e) => handleDateChange(e)} />
+                    <Calendar />
 
-                    <button
-                      className="submit_button"
-                      onClick={() => fetchHandler()}
-                    >
-                      FIND COURSES
-                    </button>
+                    <button className="submit_button">FIND COURSES</button>
                   </div>
                 ) : (
                   ""
@@ -161,7 +140,7 @@ export default function Bartending() {
                 <img src={i.image?.[0]} alt="" />
                 <p>{i.title} </p>
               </div>
-              <p className="desc">{i.description}</p>
+              <p className="desc">{i.description?.substr(0, 100)}</p>
 
               <div className="three-sec">
                 <i className="fa-solid fa-tag" />

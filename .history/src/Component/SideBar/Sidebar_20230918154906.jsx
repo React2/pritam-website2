@@ -65,7 +65,6 @@ export default function SideBar() {
                   src="/Image/Mask group.png"
                   onClick={() => setShow(false)}
                   alt=""
-                  style={{ cursor: "pointer" }}
                 />
               </div>
               <ul>

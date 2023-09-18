@@ -99,14 +99,7 @@ export default function Bartending() {
                 {i.title}
                 <BsArrowRightShort style={{ fontSize: "20px" }} />
               </p>
-              <span className="open_Span">
-                <p className="desc">{i.description}</p>
-                <ul>
-                  {i.descriptionPoints?.map((item, index) => (
-                    <li key={index}> {item} </li>
-                  ))}
-                </ul>
-              </span>
+              <span className="open_Span">{i.description}</span>
             </div>
           ))}
         </div>

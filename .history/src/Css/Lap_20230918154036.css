@@ -964,12 +964,11 @@
 }
 .Ham_Menu ul li {
   color: #fff;
-  font-size: 22px;
+  font-size: 25px;
   text-align: center;
   font-family: Plus Jakarta Sans !important;
   padding-top: 10px;
   cursor: pointer;
-  font-weight: 600;
 }
 .Ham_Menu .close_button {
   display: flex;
@@ -1062,7 +1061,7 @@
 
 .smallIcons {
   color: white;
-  font-size: 30px;
+  font-size: 1.5rem;
   line-height: 2rem;
   cursor: pointer;
 }
@@ -1074,7 +1073,7 @@
   margin: 0 auto 8% auto;
   font-family: "Nunito";
   padding: 3%;
-  font-size: 24px;
+  font-size: 20px;
   color: white;
   font-weight: 600;
   cursor: pointer;
@@ -1093,12 +1092,12 @@
   }
 
   .hoverLinkStyles {
-    font-size: 24px;
+    font-size: 30px;
     margin: 0 auto 12% auto;
   }
 
   .smallIcons {
-    font-size: 30px;
+    font-size: 2.2rem;
   }
 
   .logoContainer {
@@ -1112,7 +1111,7 @@
   }
 
   .icons {
-    font-size: 50px;
+    font-size: 70px;
   }
 }
 
@@ -2827,66 +2826,7 @@
   background-color: #fff;
   display: flex;
   border-radius: 50px;
-  position: relative;
 }
-
-.contact-us-overflow-main .Content .Main .search .date-picker {
-  position: absolute;
-  top: 0;
-  border-radius: 34px;
-  background: #fff;
-  width: 400px;
-  height: 500px;
-  right: -10px;
-  z-index: 222;
-  padding: 10px;
-}
-
-.contact-us-overflow-main .Content .Main .search .date-picker .close_icon {
-  position: relative;
-  text-align: center;
-}
-.contact-us-overflow-main .Content .Main .search .date-picker .close_icon p {
-  color: #000;
-  text-align: center;
-  font-family: Plus Jakarta Sans;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-}
-.contact-us-overflow-main .Content .Main .search .date-picker .close_icon i{
-  position: absolute;
-  right: 40px;
-  top: 5px;
-  font-size: 20px;
-  cursor: pointer;
-}
-.contact-us-overflow-main .Content .Main .search .date-picker .submit_button {
-  max-width: 350px;
-  width: 100%;
-  display: block;
-  margin: auto;
-  padding: 10px;
-  margin-top: 40px;
-  color: #033C59;
-  text-align: center;
-  font-family: Plus Jakarta Sans;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-  border-radius: 10px;
-  border: 1px solid #033C59;
-  background: #eee;
-  box-shadow: 0px 0px 3px 0px rgba(60, 72, 88, 0.15);
-  transition: 0.5s;
-}
-.contact-us-overflow-main .Content .Main .search .date-picker .submit_button:hover{
-  background: #033C59;
-  color: #fff;
-}
-
 .contact-us-overflow-main .Content .Main .search input {
   width: 80%;
   padding: 10px;

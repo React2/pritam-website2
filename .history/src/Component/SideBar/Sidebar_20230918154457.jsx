@@ -39,10 +39,10 @@ export default function SideBar() {
           <RxHamburgerMenu
             className="icons"
             onClick={() => {
-              setShowWork(false);
-              setShowWork1(false);
-              setShowWork2(false);
-              setShowWork3(false);
+              setShowWork(false)
+              setShowWork1(false)
+              setShowWork2(false)
+              setShowWork3(false)
               setShow(true);
             }}
           />
@@ -55,18 +55,12 @@ export default function SideBar() {
                 bottom: "-450px",
                 zIndex: 200,
                 background: "#f5a302",
-                width: "356px",
-                left: "60px",
-                height: "540px",
+                width: "80%",
+                height: "40px",
               }}
             >
               <div className="close_button">
-                <img
-                  src="/Image/Mask group.png"
-                  onClick={() => setShow(false)}
-                  alt=""
-                  style={{ cursor: "pointer" }}
-                />
+                <i className="fa-solid fa-x" onClick={() => setShow(false)}></i>
               </div>
               <ul>
                 <li
@@ -159,7 +153,7 @@ export default function SideBar() {
 
           <p className="hoverLinkStyles" onClick={() => setShowWork3(true)}>
             <BiDrink className="smallIcons" />
-            School for <br /> Bartending
+            School for <br />  Bartending
           </p>
 
           {showWork3 ? (

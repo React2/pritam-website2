@@ -55,18 +55,13 @@ export default function SideBar() {
                 bottom: "-450px",
                 zIndex: 200,
                 background: "#f5a302",
-                width: "356px",
-                left: "60px",
+                width: "346px",
+                left: "50px",
                 height: "540px",
               }}
             >
               <div className="close_button">
-                <img
-                  src="/Image/Mask group.png"
-                  onClick={() => setShow(false)}
-                  alt=""
-                  style={{ cursor: "pointer" }}
-                />
+                <i className="fa-solid fa-x" onClick={() => setShow(false)}></i>
               </div>
               <ul>
                 <li

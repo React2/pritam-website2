@@ -6,13 +6,11 @@ import { Store } from "react-notifications-component";
 const Baseurl = `https://pritam-backend.vercel.app/`;
 
 export const getFooterAds = async (setResponse) => {
-  try {
-    const response = await axios.get(
-      "https://pritam-backend.vercel.app/api/v1/admin/getAds"
-    );
-    setResponse(response.data.data);
-  } catch {}
-};
+  try{
+    const response = await axios.get("https://pritam-backend.vercel.app/api/v1/admin/getAds")
+    setResponse(response.data.data)
+  }catch{}
+}
 
 const getWhoWeAre = async (loading, setResponse) => {
   loading(true);
@@ -26,15 +24,13 @@ const getWhoWeAre = async (loading, setResponse) => {
   }
 };
 
-export const getWhoWeAreId = async (payload, setResponse) => {
-  try {
-    const response = await axios.get(
-      `${Baseurl}api/v1/admin/getWhoWeareById/${payload}`
-    );
-    const data = response.data.data;
-    setResponse(data);
-  } catch {}
-};
+export const getWhoWeAreId = async (payload , setResponse) => {
+  try{
+    const response = await axios.get(`${Baseurl}api/v1/admin/getWhoWeareById/${payload}`)
+    const data = response.data.data
+    setResponse(data)
+  }catch{}
+}
 
 const getPopularJob = async (setLoading, setResponse) => {
   setLoading(true);
@@ -232,11 +228,9 @@ export const eventEnquiry = async (payload) => {
   }
 };
 
-export const getCourse = async (setResponse, tillDate) => {
+export const getCourse = async (setResponse , tillDate) => {
   try {
-    const response = await axios.get(
-      `${Baseurl}api/v1/user/all?date=${tillDate}`
-    );
+    const response = await axios.get(`${Baseurl}api/v1/user/all?date=2023-10-22T00:00:00.000Z`);
     const data = response.data.data;
     setResponse(data);
   } catch {}
@@ -287,31 +281,36 @@ export const send_newsletter = async (payload) => {
   }
 };
 
+
 export const get_freelance = async (setResponse) => {
-  try {
-    const response = await axios.get(`${Baseurl}api/v1/admin/getFreelancing`);
-    const data = response.data.data;
-    setResponse(data);
-  } catch {}
-};
+  try{
+    const response = await axios.get(`${Baseurl}api/v1/admin/getFreelancing`)
+    const data = response.data.data
+    setResponse(data)
+  }catch{}
+}
+
 
 export const get_terms = async (setResponse) => {
-  try {
-    const response = await axios.get(`${Baseurl}api/v1/static/getTerms`);
-    const data = response.data.data;
-    setResponse(data);
-  } catch {}
-};
+  try{
+    const response = await axios.get(`${Baseurl}api/v1/static/getTerms`)
+    const data = response.data.data
+    setResponse(data)
+  }catch{}
+
+}
 
 export const get_privacy = async (setResponse) => {
-  try {
-    const response = await axios.get(`${Baseurl}api/v1/static/getPrivacy`);
-    const data = response.data.data;
-    setResponse(data);
-  } catch {}
-};
+  try{
+    const response = await axios.get(`${Baseurl}api/v1/static/getPrivacy`)
+    const data = response.data.data
+    setResponse(data)
+  }catch{}
 
-export const reg_user_form = async (payload) => {
+}
+
+
+ export  const reg_user_form = async (payload) => {
   try {
     const response = await axios.post(
       `${Baseurl}api/v1/user/Registerform`,
@@ -348,6 +347,7 @@ export const reg_user_form = async (payload) => {
   }
 };
 
+
 export {
   getWhoWeAre,
   getPopularJob,
@@ -360,4 +360,5 @@ export {
   get_contact_detail,
   register_staff,
   login_staff,
+  
 };

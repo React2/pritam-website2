@@ -8,6 +8,7 @@ import "react-calendar/dist/Calendar.css";
 
 export default function Bartending() {
   const [response, setResponse] = useState([]);
+  const [query, setQuery] = useState("");
   const [firstName, setFirstName] = useState(null);
   const [lastName, setLastName] = useState(null);
   const [email, setEmail] = useState(null);
@@ -18,19 +19,6 @@ export default function Bartending() {
   const [trendingServiceId, setTrendingServiceId] = useState(null);
   const [terms, setTerms] = useState([]);
   const [privacy, setPrivacy] = useState([]);
-  const [showDatePicker, setShowDatePicker] = useState(false);
-  const [lastDate, setLastDate] = useState(null);
-
-  const tillDate = lastDate === null ? "" : `${lastDate}T23:59:59.000Z`;
-
-  function handleDateChange(e) {
-    const formattedDate = e.toISOString().split("T")[0];
-    setLastDate(formattedDate);
-  }
-
-  const fetchHandler = () => {
-    getCourse(setResponse, tillDate);
-  };
 
   const payload = {
     firstName,
@@ -56,13 +44,16 @@ export default function Bartending() {
   };
 
   useEffect(() => {
+    getCourse(setResponse);
     get_terms(setTerms);
     get_privacy(setPrivacy);
   }, []);
 
-  useEffect(() => {
-    fetchHandler();
-  }, []);
+  const filterData = !query
+    ? response
+    : response?.filter((i) =>
+        i?.title?.toLowerCase().includes(query?.toLowerCase())
+      );
 
   return (
     <div>
@@ -99,14 +90,7 @@ export default function Bartending() {
                 {i.title}
                 <BsArrowRightShort style={{ fontSize: "20px" }} />
               </p>
-              <span className="open_Span">
-                <p className="desc">{i.description}</p>
-                <ul>
-                  {i.descriptionPoints?.map((item, index) => (
-                    <li key={index}> {item} </li>
-                  ))}
-                </ul>
-              </span>
+              <span className="open_Span">{i.description}</span>
             </div>
           ))}
         </div>
@@ -119,49 +103,29 @@ export default function Bartending() {
                 <input
                   type="search"
                   placeholder="Search Courses Available"
-                  onClick={() => setShowDatePicker(true)}
                 />
-                <div
-                  class="search-icon"
-                  onClick={() => setShowDatePicker(true)}
-                >
+                <div class="search-icon">
                   <i class="fa-solid fa-magnifying-glass"></i>
                 </div>
 
-                {showDatePicker ? (
-                  <div className="date-picker">
-                    <div className="close_icon">
-                      <p>Select Date</p>
-                      <i
-                        class="fa-solid fa-x"
-                        onClick={() => setShowDatePicker(false)}
-                      ></i>
-                    </div>
-                    <Calendar onChange={(e) => handleDateChange(e)} />
+              <div className="date-picker">
+              
+              </div>
 
-                    <button
-                      className="submit_button"
-                      onClick={() => fetchHandler()}
-                    >
-                      FIND COURSES
-                    </button>
-                  </div>
-                ) : (
-                  ""
-                )}
+
               </div>
             </div>
           </div>
         </div>
 
         <div className="Courses_Section">
-          {response?.map((i, index) => (
+          {filterData?.map((i, index) => (
             <div className="Item" key={index}>
               <div className="Image-cont">
                 <img src={i.image?.[0]} alt="" />
                 <p>{i.title} </p>
               </div>
-              <p className="desc">{i.description}</p>
+              <p className="desc">{i.description?.substr(0,100)}</p>
 
               <div className="three-sec">
                 <i className="fa-solid fa-tag" />

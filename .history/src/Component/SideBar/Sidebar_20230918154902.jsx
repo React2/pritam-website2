@@ -61,12 +61,8 @@ export default function SideBar() {
               }}
             >
               <div className="close_button">
-                <img
-                  src="/Image/Mask group.png"
-                  onClick={() => setShow(false)}
-                  alt=""
-                  style={{ cursor: "pointer" }}
-                />
+              <img src="/Image/Mask group.png" onClick={() => setShow(false)} alt='' />
+                <i className="fa-solid fa-x" ></i>
               </div>
               <ul>
                 <li

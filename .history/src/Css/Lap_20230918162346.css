@@ -2835,57 +2835,26 @@
   top: 0;
   border-radius: 34px;
   background: #fff;
-  width: 400px;
-  height: 500px;
-  right: -10px;
+  width: 548px;
+  height: 702px;
+  right: 0;
   z-index: 222;
-  padding: 10px;
 }
 
-.contact-us-overflow-main .Content .Main .search .date-picker .close_icon {
+.contact-us-overflow-main .Content .Main .search .date-picker .close_icon{
   position: relative;
   text-align: center;
 }
-.contact-us-overflow-main .Content .Main .search .date-picker .close_icon p {
+.contact-us-overflow-main .Content .Main .search .date-picker .close_icon p{
   color: #000;
-  text-align: center;
-  font-family: Plus Jakarta Sans;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
+text-align: center;
+font-family: Plus Jakarta Sans;
+font-size: 36px;
+font-style: normal;
+font-weight: 600;
+line-height: 54px; /* 150% */
 }
-.contact-us-overflow-main .Content .Main .search .date-picker .close_icon i{
-  position: absolute;
-  right: 40px;
-  top: 5px;
-  font-size: 20px;
-  cursor: pointer;
-}
-.contact-us-overflow-main .Content .Main .search .date-picker .submit_button {
-  max-width: 350px;
-  width: 100%;
-  display: block;
-  margin: auto;
-  padding: 10px;
-  margin-top: 40px;
-  color: #033C59;
-  text-align: center;
-  font-family: Plus Jakarta Sans;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-  border-radius: 10px;
-  border: 1px solid #033C59;
-  background: #eee;
-  box-shadow: 0px 0px 3px 0px rgba(60, 72, 88, 0.15);
-  transition: 0.5s;
-}
-.contact-us-overflow-main .Content .Main .search .date-picker .submit_button:hover{
-  background: #033C59;
-  color: #fff;
-}
+
 
 .contact-us-overflow-main .Content .Main .search input {
   width: 80%;
