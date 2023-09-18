@@ -161,7 +161,7 @@ export default function Bartending() {
                 <img src={i.image?.[0]} alt="" />
                 <p>{i.title} </p>
               </div>
-              <p className="desc">{i.description}</p>
+              <p className="desc">{i.description?.substr(0,100)}</p>
 
               <div className="three-sec">
                 <i className="fa-solid fa-tag" />
