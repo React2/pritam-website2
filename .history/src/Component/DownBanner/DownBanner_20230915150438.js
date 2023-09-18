@@ -1,7 +1,6 @@
 /** @format */
 
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { getFooterAds } from "../../Repo/Api";
 
 const DownBanner = ({ setshow }) => {
@@ -18,9 +17,9 @@ const DownBanner = ({ setshow }) => {
         <img src={data?.image} alt="" />
         <p>{data?.title}</p>
 
-        <Link to={"/ads"}>
+        <a href={data?.link} target="_blank">
           <button>VIEW DETAILS</button>
-        </Link>
+        </a>
       </div>
     </div>
   ) : (

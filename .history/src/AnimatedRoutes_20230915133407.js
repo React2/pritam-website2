@@ -24,7 +24,6 @@ import PropTypes from "prop-types";
 import Freelance from "./Pages/Freelance";
 import Bartending from "./Pages/bartending";
 import WhoWeAre from "./Pages/WhoWeAre";
-import AdScreen from "./Pages/AdScreen";
 
 const AnimatedRoutes = () => {
   const location = useLocation();
@@ -38,8 +37,7 @@ const AnimatedRoutes = () => {
       <AnimatePresence>
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<Wrapper childer={<HomePage />} />} />
-          <Route path="/ads" element={<AdScreen />} />
-          <Route 
+          <Route
             path="/bartending"
             element={<Wrapper childer={<Bartending />} />}
           />

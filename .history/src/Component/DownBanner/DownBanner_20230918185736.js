@@ -18,7 +18,7 @@ const DownBanner = ({ setshow }) => {
         <img src={data?.image} alt="" />
         <p>{data?.title}</p>
 
-        <Link to={"/ads"}>
+        <Link href={data?.link} target="_blank">
           <button>VIEW DETAILS</button>
         </Link>
       </div>
