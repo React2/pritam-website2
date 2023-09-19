@@ -16,7 +16,7 @@ export default function HomeImage() {
       <Link to="/sign-in">
         <button className="home_page_SingIn"> SIGN IN</button>
       </Link>
-      <video className="homeImage" src={data?.bannerVideo} autoPlay loop muted></video>
+      <video className="homeImage" src="/video.mp4" autoPlay loop muted></video>
       <div className="imageInfo">
         <h1>{data?.bannerTitle}</h1>
         <p>{data?.bannerDescription}</p>

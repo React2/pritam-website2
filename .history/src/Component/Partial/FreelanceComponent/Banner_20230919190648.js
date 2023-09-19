@@ -17,7 +17,7 @@ const Banner = () => {
     <>
       <StaffLoginModal show={modalShow} onHide={() => setModalShow(false)} />
 
-      <div className="BannerFree AboutUs" style={{ backgroundImage: `url(${data?.bannerImage})` }}>
+      <div className="BannerFree AboutUs" style={{ backgroundImage: "url(${data?.bannerImage})` }}>
         <div className="content2">
           <h2 style={{ fontFamily: "Plus Jakarta Sans" }}>Freelancing</h2>
           <h4>{data?.bannerTitle}</h4>

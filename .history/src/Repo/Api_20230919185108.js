@@ -8,9 +8,7 @@ const Baseurl = `https://pritam-backend.vercel.app/`;
 
 export const getBannerType = async (query , setResponse) => {
   try{
-    const response  = await axios.get(`https://pritam-backend.vercel.app/api/v1/admin/BannerbyType/${query}`)
-    const data = response.data.data?.[0]
-    setResponse(data)
+    const response  = await axios.get(`https://pritam-backend.vercel.app/api/v1/admin/BannerbyType/${}`)
   }catch{}
 }
 

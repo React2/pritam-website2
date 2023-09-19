@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import AboutSection from "../Component/Partial/Find Work Component/AboutSection";
 import Banner from "../Component/Partial/Find Work Component/Banner";
 import HeadingCont from "../Component/Partial/heading-cont";
-import { eventEnquiry } from "../Repo/Api";
+import { eventEnquiry, getBannerType } from "../Repo/Api";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 
@@ -17,7 +17,7 @@ const FindWork = () => {
   const [interest, setInterest] = useState(null);
   const [date, setDate] = useState(null);
   const [slot, setSlot] = useState(null);
-
+  const [ data , setData ] = useState({})
 
 
 
@@ -37,7 +37,9 @@ const FindWork = () => {
     eventEnquiry(payload);
   };
 
-
+  useEffect(() => {
+    getBannerType("Find Work")
+  },[])
 
   useEffect(() => {
     window.scrollTo(0, 0);

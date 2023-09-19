@@ -18,9 +18,6 @@ const FindWork = () => {
   const [date, setDate] = useState(null);
   const [slot, setSlot] = useState(null);
 
-
-
-
   const payload = {
     firstName,
     lastName,
@@ -37,12 +34,10 @@ const FindWork = () => {
     eventEnquiry(payload);
   };
 
-
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
+  
   return (
     <>
       <Banner />
@@ -51,7 +46,7 @@ const FindWork = () => {
         content={"Use the form below to get in touch."}
       />
 
-      <div
+      <div  
         className="Find_work_contact_form"
         style={{ justifyContent: "space-evenly" }}
       >

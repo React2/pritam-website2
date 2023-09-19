@@ -8,7 +8,7 @@ const Banner = () => {
   const [data, setData] = useState({});
 
   useEffect(() => {
-    getBannerType("Find Talent	", setData);
+    getBannerType("Find Talented Staff	", setData);
   }, []);
 
 

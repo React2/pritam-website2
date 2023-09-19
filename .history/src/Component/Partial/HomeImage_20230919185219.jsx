@@ -2,24 +2,30 @@
 
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { getBannerType } from "../../Repo/Api";
 
 export default function HomeImage() {
-  const [data, setData] = useState({});
+  const [ data , setData ] = useState({})
 
   useEffect(() => {
-    getBannerType("Homepage", setData);
-  }, []);
+    getBannerTypy
+  })
 
   return (
-    <div style={{ position: "relative", height: "80vh" }} className="BackViedo">
+    <div style={{ position: "relative", height: "80vh" 
+    
+      }} className='BackViedo' >
       <Link to="/sign-in">
         <button className="home_page_SingIn"> SIGN IN</button>
       </Link>
-      <video className="homeImage" src={data?.bannerVideo} autoPlay loop muted></video>
+      <video className="homeImage" src="/video.mp4" autoPlay loop muted></video>
       <div className="imageInfo">
-        <h1>{data?.bannerTitle}</h1>
-        <p>{data?.bannerDescription}</p>
+        <h1>
+          Find & Hire Experts <br /> for any Job
+        </h1>
+        <p>
+          Find Jobs, Employment & Carrer Opportunities. Some of the companies
+          we&#39;ve helped recruit excellent applicants over the years
+        </p>
       </div>
       <div className="socialLinks">
         <a href="https://instagram.com" target="_blank">

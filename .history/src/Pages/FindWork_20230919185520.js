@@ -17,7 +17,7 @@ const FindWork = () => {
   const [interest, setInterest] = useState(null);
   const [date, setDate] = useState(null);
   const [slot, setSlot] = useState(null);
-
+  const [ data , setData ] = useState({})
 
 
 
@@ -37,7 +37,9 @@ const FindWork = () => {
     eventEnquiry(payload);
   };
 
-
+  useEffect(() => {
+    
+  })
 
   useEffect(() => {
     window.scrollTo(0, 0);

@@ -55,8 +55,8 @@ export default function SideBar() {
                 bottom: "-450px",
                 zIndex: 200,
                 background: "#f5a302",
-                width: "80%",
-                left: "10%",
+                width: "100%",
+                left: "60px",
                 height: "540px",
               }}
             >

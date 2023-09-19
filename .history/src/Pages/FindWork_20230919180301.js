@@ -18,9 +18,6 @@ const FindWork = () => {
   const [date, setDate] = useState(null);
   const [slot, setSlot] = useState(null);
 
-
-
-
   const payload = {
     firstName,
     lastName,
@@ -36,8 +33,6 @@ const FindWork = () => {
     e.preventDefault();
     eventEnquiry(payload);
   };
-
-
 
   useEffect(() => {
     window.scrollTo(0, 0);

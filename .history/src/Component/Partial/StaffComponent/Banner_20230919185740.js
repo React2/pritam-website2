@@ -1,23 +1,18 @@
 /** @format */
 
-import React , { useState , useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { getBannerType } from "../../../Repo/Api";
 
 const Banner = () => {
-  const [data, setData] = useState({});
 
-  useEffect(() => {
-    getBannerType("Find Talent	", setData);
-  }, []);
-
-
+  
   return (
     <div className="Event_Booking-Banner">
       <div className="upper" style={{ paddingTop: "20px" }}>
-        <h5> {data?.bannerTitle} </h5>
+        <h5>Find Talented Staff</h5>
         <p style={{ fontFamily: "Plus Jakarta Sans" }}>
-        {data?.bannerDescription}
+          Find Jobs, Employment & Career Opportunities. Some of the companies we
+          have helped recruit excellent applicants over the years.
         </p>
       </div>
       <div className="down">

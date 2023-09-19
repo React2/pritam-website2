@@ -8,7 +8,7 @@ const Banner = () => {
   const [data, setData] = useState({});
 
   useEffect(() => {
-    getBannerType("Find Talent	", setData);
+    getBannerType("Find Talented Staff	", setData);
   }, []);
 
 
@@ -17,7 +17,7 @@ const Banner = () => {
       <div className="upper" style={{ paddingTop: "20px" }}>
         <h5> {data?.bannerTitle} </h5>
         <p style={{ fontFamily: "Plus Jakarta Sans" }}>
-        {data?.bannerDescription}
+        {data?.bannerTitle}
         </p>
       </div>
       <div className="down">
