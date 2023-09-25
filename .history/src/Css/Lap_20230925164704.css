@@ -5475,25 +5475,11 @@
 .modal-dialog {
   margin-left: 35% !important;
 }
-
-
-@media screen and (min-width: 700px) and (max-width: 100px) {
+@media screen and (min-width: 1000px) and (max-width: 1450px) {
   .modal-dialog {
     margin-left: 26% !important;
   }
 }
-@media screen and (min-width: 1000px) and (max-width: 1200px) {
-  .modal-dialog {
-    margin-left: 26% !important;
-  }
-}
-
-@media screen and (min-width: 1200px) and (max-width: 1550px) {
-  .modal-dialog {
-    margin-left: 30% !important;
-  }
-}
-
 
 @media (max-width: 768px) {
   .modal-dialog {
@@ -5506,12 +5492,6 @@
   .AddScreeenBg{
     width: 100%;
     display: block;
-  }
-  .AddScreeen{
-    display: block;
-  }
-  .AddScreeen p {
-    width: 100%;
   }
 }
 

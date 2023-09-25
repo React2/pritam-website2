@@ -5477,11 +5477,6 @@
 }
 
 
-@media screen and (min-width: 700px) and (max-width: 100px) {
-  .modal-dialog {
-    margin-left: 26% !important;
-  }
-}
 @media screen and (min-width: 1000px) and (max-width: 1200px) {
   .modal-dialog {
     margin-left: 26% !important;
@@ -5490,7 +5485,7 @@
 
 @media screen and (min-width: 1200px) and (max-width: 1550px) {
   .modal-dialog {
-    margin-left: 30% !important;
+    margin-left: 10% !important;
   }
 }
 
