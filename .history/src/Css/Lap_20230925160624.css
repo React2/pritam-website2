@@ -5477,7 +5477,7 @@
 }
 @media screen and (min-width: 1000px) and (max-width: 1450px) {
   .modal-dialog {
-    margin-left: 26% !important;
+    margin-left: 28% !important;
   }
 }
 
@@ -5489,9 +5489,7 @@
   .Chef_Modal .container .right .desc {
     text-align: justify !important;
   }
-  .AddScreeenBg{
-    width: 100%;
-  }
+  
 }
 
 @media (min-width: 1200px) {

@@ -5475,10 +5475,9 @@
 .modal-dialog {
   margin-left: 35% !important;
 }
-@media screen and (min-width: 1000px) and (max-width: 1450px) {
-  .modal-dialog {
-    margin-left: 26% !important;
-  }
+
+@media (max-width : ) {
+  
 }
 
 @media (max-width: 768px) {
@@ -5488,9 +5487,6 @@
   }
   .Chef_Modal .container .right .desc {
     text-align: justify !important;
-  }
-  .AddScreeenBg{
-    width: 100%;
   }
 }
 
