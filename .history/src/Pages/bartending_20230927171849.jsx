@@ -147,10 +147,7 @@ export default function Bartending() {
 
                     <button
                       className="submit_button"
-                      onClick={() => {
-                        fetchHandler();
-                        setShowDatePicker(false);
-                      }}
+                      onClick={() => fetchHandler()}
                     >
                       FIND COURSES
                     </button>
@@ -168,7 +165,7 @@ export default function Bartending() {
             className="bold-heading"
             style={{ color: "#FFf", fontSize: "20px" }}
           >
-            No Course's Found
+            No Course Related to {lastDate}
           </h1>
         ) : (
           <div className="Courses_Section">

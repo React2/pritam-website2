@@ -2,13 +2,7 @@
 import FAQ from "../Component/Partial/Contact Us Components/FAQ";
 import { BsArrowRightShort } from "react-icons/bs";
 import { useEffect, useState } from "react";
-import {
-  eventEnquiry,
-  getBannerType,
-  getCourse,
-  get_privacy,
-  get_terms,
-} from "../Repo/Api";
+import { eventEnquiry, getBannerType, getCourse, get_privacy, get_terms } from "../Repo/Api";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 
@@ -26,7 +20,7 @@ export default function Bartending() {
   const [privacy, setPrivacy] = useState([]);
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [lastDate, setLastDate] = useState(null);
-  const [data, setData] = useState({});
+  const [ data , setData ] = useState({})
 
   const tillDate = lastDate === null ? "" : `${lastDate}T23:59:59.000Z`;
 
@@ -72,10 +66,11 @@ export default function Bartending() {
   }, []);
 
   useEffect(() => {
-    getBannerType("Bartending", setData);
-  }, []);
+    getBannerType("Bartending" , setData)
+  },[])
 
-  const filterData = response?.reverse()?.slice(0, 3);
+
+  const filterData = response?.reverse()?.slice(0,3)
 
   return (
     <div>
@@ -84,7 +79,9 @@ export default function Bartending() {
           <img src={data?.bannerImage} alt="" />
           <div className="bartending-banner-absolute-div">
             <h1> {data?.bannerTitle} </h1>
-            <p>{data?.bannerDescription}</p>
+            <p>
+            {data?.bannerDescription}
+            </p>
           </div>
         </div>
 
@@ -147,10 +144,7 @@ export default function Bartending() {
 
                     <button
                       className="submit_button"
-                      onClick={() => {
-                        fetchHandler();
-                        setShowDatePicker(false);
-                      }}
+                      onClick={() => fetchHandler()}
                     >
                       FIND COURSES
                     </button>
@@ -163,37 +157,29 @@ export default function Bartending() {
           </div>
         </div>
 
-        {filterData?.length === 0 ? (
-          <h1
-            className="bold-heading"
-            style={{ color: "#FFf", fontSize: "20px" }}
-          >
-            No Course's Found
-          </h1>
-        ) : (
-          <div className="Courses_Section">
-            {filterData?.map((i, index) => (
-              <div className="Item" key={index}>
-                <div className="Image-cont">
-                  <img src={i.image?.[0]} alt="" />
-                  <p>{i.title} </p>
-                </div>
-                <p className="desc">{i.description?.substr(0, 100)}</p>
-
-                <div className="three-sec">
-                  <i className="fa-solid fa-tag" />
-                  <p>Price - {i.price}£</p>
-                </div>
-                <div className="three-sec">
-                  <i className="fa-solid fa-hourglass-start" />
-                  <p>
-                    Duration - {i.toDay} - {i.fromDay} , {i.toTime}{" "}
-                  </p>
-                </div>
+        <div className="Courses_Section">
+        {filterData?.length === 0 ? "" : <p>No Course Related to give</p>}
+          {filterData?.map((i, index) => (
+            <div className="Item" key={index}>
+              <div className="Image-cont">
+                <img src={i.image?.[0]} alt="" />
+                <p>{i.title} </p>
               </div>
-            ))}
-          </div>
-        )}
+              <p className="desc">{i.description?.substr(0,100)}</p>
+
+              <div className="three-sec">
+                <i className="fa-solid fa-tag" />
+                <p>Price - {i.price}£</p>
+              </div>
+              <div className="three-sec">
+                <i className="fa-solid fa-hourglass-start" />
+                <p>
+                  Duration - {i.toDay} - {i.fromDay} , {i.toTime}{" "}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
 
         <div className="About-Us_Newsletter">
           <div class="left" style={{ width: "40%" }}>

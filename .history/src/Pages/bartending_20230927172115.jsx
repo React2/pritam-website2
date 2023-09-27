@@ -168,7 +168,7 @@ export default function Bartending() {
             className="bold-heading"
             style={{ color: "#FFf", fontSize: "20px" }}
           >
-            No Course's Found
+            No Course Found
           </h1>
         ) : (
           <div className="Courses_Section">
