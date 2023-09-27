@@ -79,7 +79,7 @@ export default function Bartending() {
           <div className="bartending-banner-absolute-div">
             <h1> {data?.bannerTitle} </h1>
             <p>
-            {data?.bannerDescription}
+     \        {data?.bannerDescription}
             </p>
           </div>
         </div>
