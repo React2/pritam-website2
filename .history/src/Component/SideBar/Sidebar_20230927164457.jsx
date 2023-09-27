@@ -52,7 +52,7 @@ export default function SideBar() {
               className="Ham_Menu"
               style={{
                 position: "absolute",
-                bottom: "-430px",
+                bottom: "-420px",
                 zIndex: 200,
                 background: "#f5a302",
                 width: "80%",
