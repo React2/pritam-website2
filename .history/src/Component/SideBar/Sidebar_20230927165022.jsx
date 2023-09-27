@@ -52,12 +52,12 @@ export default function SideBar() {
               className="Ham_Menu"
               style={{
                 position: "absolute",
-                bottom: "-300px",
+                bottom: "-390px",
                 zIndex: 200,
                 background: "#f5a302",
                 width: "80%",
                 left: "10%",
-                height: "400px",
+                height: "0px",
               }}
             >
               <div className="close_button">
