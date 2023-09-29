@@ -1051,8 +1051,9 @@
 .Ham_Menu .Desc .Close-Button p.title {
   margin: 0;
   width: 70%;
-  /* text-align: right; */
-  text-align: center;
+  text-align: right;
+  text-align: right;
+  text-align: right;
 }
 
 .Ham_Menu .Desc .Close-Button i {
