@@ -31,6 +31,24 @@ export default function MobileSideBar() {
 
   const navigate = useNavigate();
 
+  function NavHandler(link) {
+    setShowWork(false);
+    setShowWork1(false);
+    setShowWork2(false);
+    setShowWork3(false);
+    navigate(link);
+    setShow(false);
+    closeSidebar();
+  }
+
+  function OpenMenu() {
+    setShowWork(false);
+    setShowWork1(false);
+    setShowWork2(false);
+    setShowWork3(false);
+    setShow(!show);
+  }
+
   return (
     <div className="mobile-sidebar-container">
       <div className="logoContainer">
@@ -40,67 +58,49 @@ export default function MobileSideBar() {
         <IoMdClose className="icons" onClick={closeSidebar} />
       </div>
 
-      <RxHamburgerMenu className="icons ham_menu" onClick={() => setShow(!show)} />
+      <RxHamburgerMenu className="icons ham_menu" onClick={() => OpenMenu()} />
 
       {show ? (
         <div
           className="Ham_Menu"
           style={{
             position: "absolute",
-            bottom: "220px",
+            top: "2%",
             zIndex: 200,
             background: "#f5a302",
             width: "90%",
-            marginLeft : "5%",
-            height: "600px",
+            marginLeft: "5%",
+            height: "420px",
           }}
         >
           <div className="close_button">
             <i className="fa-solid fa-x" onClick={() => setShow(false)}></i>
           </div>
           <ul>
-            <li
-              style={{ paddingTop: "30px" }}
-              onClick={() => {
-                navigate("/");
-                setShow(false);
-              }}
-            >
+            <li style={{ paddingTop: "30px" }} onClick={() => NavHandler("/")}>
               HOME
             </li>
             <li
               style={{ paddingTop: "30px" }}
-              onClick={() => {
-                navigate("/event-booking");
-                setShow(false);
-              }}
+              onClick={() => NavHandler("/event-booking")}
             >
               EVENT BOOKING
             </li>
             <li
               style={{ paddingTop: "30px" }}
-              onClick={() => {
-                navigate("/bartending");
-                setShow(false);
-              }}
+              onClick={() => NavHandler("/bartending")}
             >
               COURSES
             </li>
             <li
               style={{ paddingTop: "30px" }}
-              onClick={() => {
-                navigate("/about-us");
-                setShow(false);
-              }}
+              onClick={() => NavHandler("/about-us")}
             >
               ABOUT US
             </li>
             <li
               style={{ paddingTop: "30px" }}
-              onClick={() => {
-                navigate("/contact-us");
-                setShow(false);
-              }}
+              onClick={() => NavHandler("/contact-us")}
             >
               CONTACT US
             </li>
@@ -120,7 +120,10 @@ export default function MobileSideBar() {
         </p>
 
         {showWork === true ? (
-          <FindworkOver onHide={() => setShowWork(false)} />
+          <FindworkOver
+            onHide={() => setShowWork(false)}
+            closeSidebar={closeSidebar}
+          />
         ) : (
           ""
         )}
@@ -131,7 +134,10 @@ export default function MobileSideBar() {
         </p>
 
         {showWork1 ? (
-          <FindTalentedOver onHide={() => setShowWork1(false)} />
+          <FindTalentedOver
+            onHide={() => setShowWork1(false)}
+            closeSidebar={closeSidebar}
+          />
         ) : (
           ""
         )}
@@ -142,7 +148,10 @@ export default function MobileSideBar() {
         </p>
 
         {showWork2 ? (
-          <FreelancingOver onHide={() => setShowWork2(false)} />
+          <FreelancingOver
+            onHide={() => setShowWork2(false)}
+            closeSidebar={closeSidebar}
+          />
         ) : (
           ""
         )}
@@ -152,7 +161,14 @@ export default function MobileSideBar() {
           School for Bartending
         </p>
 
-        {showWork3 ? <BartendingOver onHide={() => setShowWork3(false)} /> : ""}
+        {showWork3 ? (
+          <BartendingOver
+            onHide={() => setShowWork3(false)}
+            closeSidebar={closeSidebar}
+          />
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );

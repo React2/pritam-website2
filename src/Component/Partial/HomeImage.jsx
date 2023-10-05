@@ -14,7 +14,7 @@ export default function HomeImage() {
   }, []);
 
   return (
-    <div style={{ position: "relative", height: "80vh" }} className="BackViedo">
+    <div  className="BackViedo">
       <Link to="/sign-in">
         <button className="home_page_SingIn"> SIGN IN</button>
       </Link>

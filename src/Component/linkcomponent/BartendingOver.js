@@ -32,8 +32,9 @@ const BartendingOver = (props) => {
         <div className="buttons last_buttons">
           <button
             onClick={() => {
-              navigate("/bartending");
+              props.closeSidebar && props.closeSidebar();
               props.onHide();
+              navigate("/bartending");
             }}
           >
             JOIN NOW{" "}

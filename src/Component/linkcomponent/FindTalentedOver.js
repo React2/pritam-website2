@@ -32,8 +32,9 @@ const FindTalentedOver = (props) => {
         <div className="buttons last_buttons">
           <button
             onClick={() => {
-              navigate("/staff");
+              props.closeSidebar && props.closeSidebar();
               props.onHide();
+              navigate("/staff");
             }}
           >
             FIND TALENT NOW{" "}
@@ -41,13 +42,13 @@ const FindTalentedOver = (props) => {
 
           <button
             onClick={() => {
-              navigate("/client-login");
+              props.closeSidebar && props.closeSidebar();
               props.onHide();
+              navigate("/client-login");
             }}
           >
             REGISTER NOW
           </button>
-          
         </div>
       </div>
     </div>

@@ -1,7 +1,7 @@
 /** @format */
 
 import React from "react";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const FreelancingOver = (props) => {
   const navigate = useNavigate();
@@ -17,8 +17,6 @@ const FreelancingOver = (props) => {
         height: "90%",
       }}
     >
-  
-
       <div className="Desc">
         <div className="Close-Button">
           <p className="title"> FREELANCING </p>
@@ -31,14 +29,15 @@ const FreelancingOver = (props) => {
         </p>
 
         <div className="buttons last_buttons">
-            <button
-              onClick={() => {
-                navigate("/freelance");
-                props.onHide();
-              }}
-            >
-              JOIN NOW{" "}
-            </button>
+          <button
+            onClick={() => {
+              props.closeSidebar && props.closeSidebar();
+              props.onHide();
+              navigate("/freelance");
+            }}
+          >
+            JOIN NOW{" "}
+          </button>
         </div>
       </div>
     </div>

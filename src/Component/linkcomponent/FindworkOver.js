@@ -12,7 +12,7 @@ const FindworkOver = (props) => {
         position: "absolute",
         top: 0,
         left: 0,
-        right : 0,
+        right: 0,
         zIndex: 200,
         background: "#f5a302",
         height: "90%",
@@ -32,8 +32,9 @@ const FindworkOver = (props) => {
         <div className="buttons last_buttons">
           <button
             onClick={() => {
-              navigate("/find-work");
+              props.closeSidebar && props.closeSidebar();
               props.onHide();
+              navigate("/find-work");
             }}
           >
             {" "}
@@ -41,8 +42,9 @@ const FindworkOver = (props) => {
           </button>
           <button
             onClick={() => {
-              navigate("/client-login");
+              props.closeSidebar && props.closeSidebar();
               props.onHide();
+              navigate("/client-login");
             }}
           >
             REGISTER NOW

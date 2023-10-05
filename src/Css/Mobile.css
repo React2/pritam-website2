@@ -28,8 +28,8 @@
   }
 
   .Banner {
-    min-height: 450px;
-    max-height: 100%;
+    min-height: 400px;
+    max-height: 450px;
   }
   .Banner .content {
     position: relative;
@@ -57,6 +57,9 @@
   }
   .Banner .content .two_button button img {
     display: none;
+  }
+  .Banner p {
+    overflow-y: hidden;
   }
   .Banner .content .Bottom_Button {
     height: 40px;
@@ -1011,25 +1014,24 @@
     width: 100%;
   }
   .casual-staff
-  .Community_Page
-  .Find_work_contact_form
-  .right_container
-  .contact-query-form
-  .submit-btn {
+    .Community_Page
+    .Find_work_contact_form
+    .right_container
+    .contact-query-form
+    .submit-btn {
     width: 100%;
   }
   .casual-staff
-  .Community_Page
-  .Find_work_contact_form
-  .right_container
-  .contact-query-form
-  .Whatsapp_Button {
+    .Community_Page
+    .Find_work_contact_form
+    .right_container
+    .contact-query-form
+    .Whatsapp_Button {
     width: 100%;
     font-size: 15px;
   }
 
-
-  .sideBarContainer{
+  .sideBarContainer {
     max-width: 100%;
     width: 100%;
     min-width: 100%;
@@ -1051,14 +1053,14 @@
     margin-bottom: 20px;
     width: 100px;
   }
-  .icons{
+  .icons {
     font-size: 40px;
   }
 
-  .para-div{
+  .para-div {
     width: 90%;
   }
-  .hoverLinkStyles{
+  .hoverLinkStyles {
     margin: 0;
     font-size: 20px;
     gap: 20px;
@@ -1068,10 +1070,43 @@
   }
 
   .homeImage {
-    height: 400px;
+    height: 100%;
   }
 
-  .ham_menu{
+  .ham_menu {
     margin-left: 40px;
+  }
+  .BackViedo {
+    height: 400px;
+  }
+  .imageInfo {
+    width: 100%;
+  }
+
+  .Contact-Us_Banner .content {
+    width: 100% !important;
+  }
+  .Contact-Us_Banner .content p {
+    text-align: center;
+  }
+  .About-Us_Newsletter .right .content .contact_Detail {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .Event_Booking-Banner .down .main .content button {
+    padding: 10px;
+  }
+  .contsc_work_form_2 .left_container {
+    max-height: 400px;
+  }
+  .contact-query-form form .Whatsapp_Button{
+    font-size: 14px;
+  }
+  .about-item-container .about-item img{
+    width: 100%;
+    height: auto;
+  }
+  .Find-Work-Banner .down .main .content .desc{
+    top: 50%;
   }
 }
