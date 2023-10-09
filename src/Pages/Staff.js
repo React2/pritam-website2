@@ -1,14 +1,19 @@
 /** @format */
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Newsletter from "../Component/Partial/About Us Component/Newsletter";
 import HeadingCont from "../Component/Partial/heading-cont";
 import Banner from "../Component/Partial/StaffComponent/Banner";
 import TrainingCourse from "../Component/Partial/StaffComponent/TrainingCourse";
+import { AllTalentedStaff, AllTalentedStaffType } from "../Repo/Api";
 
 const Staff = () => {
+  const [response, setResponse] = useState([]);
+  
   useEffect(() => {
     window.scrollTo(0, 0);
+    AllTalentedStaff(setResponse);
+    console.log("response",response)
   }, []);
   return (
     <>

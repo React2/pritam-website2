@@ -384,6 +384,26 @@ export const getBuisness = async (setResponse) => {
 }
 
 
+export const AllTalentedStaff = async (setResponse) => {
+  try {
+    const response = await axios.get(`${Baseurl}api/v1/admin/addStaffTalented`);
+    const data = response.data;
+    setResponse(data);
+  } catch (error) {}
+};
+
+export const AllTalentedStaffType = async (setResponse) => {
+  try {
+    const response = await axios.get(
+      `${Baseurl}api/v1/admin/getstaffTalentedType`
+    );
+    const data = response.data;
+    setResponse(data);
+  } catch (error) {}
+};
+
+
+
 export {
   getWhoWeAre,
   getPopularJob,

@@ -14,10 +14,10 @@ MobileSideBar from "./Component/SideBar/MobileSideBar";
 import { SHOW_MOBILE_SIDEBAR } from "./store/action";
 import HomeImage from "./Component/Partial/HomeImage";
 import { ReactNotifications } from "react-notifications-component";
-import "./CSS/Navbar.css";
-import "./CSS/Lap.css";
-import "./CSS/Responsive.css";
-import "./CSS/Mobile.css";
+import "./Css/Navbar.css";
+import "./Css/Lap.css";
+import "./Css/Responsive.css";
+import "./Css/Mobile.css";
 
 const App = () => {
   const [state, dispatch] = useContext(StoreContext);
