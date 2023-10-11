@@ -15,7 +15,7 @@ const BookAnEvent = () => {
   const [head, setHead] = useState(null);
   const [descPoints, setDescPoints] = useState([]);
   const { id } = useParams();
-
+  const { type } = useParams();
   const [firstName, setFirstName] = useState(null);
   const [lastName, setLastName] = useState(null);
   const [email, setEmail] = useState(null);
@@ -34,7 +34,7 @@ const BookAnEvent = () => {
     slot,
     eventId: id,
   };
-
+  console.log("eventFaqtype", type);
   const handleSubmit = async (e) => {
     e.preventDefault();
     await eventEnquiry(payload);
@@ -261,7 +261,9 @@ const BookAnEvent = () => {
 
         <div className="mt-5 Community_Page" id='EventFaq' >
           {" "}
-          <FAQ />
+          <FAQ 
+            type="EventHome"
+          />
         </div>
 
 

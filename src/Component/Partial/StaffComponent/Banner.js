@@ -3,10 +3,12 @@
 import React , { useState , useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getBannerType } from "../../../Repo/Api";
+import { useParams } from "react-router-dom";
 
-const Banner = () => {
+const Banner = ({id,staffId}) => {
+
   const [data, setData] = useState({});
-
+  console.log(id,staffId)
   useEffect(() => {
     getBannerType("Find Talent	", setData);
   }, []);
@@ -25,7 +27,7 @@ const Banner = () => {
           <div className="content">
             <img src="./Image/40.png" alt="" />
             <h5>Casual Staff</h5>
-            <Link to="/casual-staff">
+            <Link to={`/casual-staff/${id}`} >
               <button>
                 <p>CLICK HERE</p> <i className="fa-solid fa-caret-right"></i>
               </button>
@@ -34,7 +36,7 @@ const Banner = () => {
           <div className="content">
             <img src="./Image/41.png" alt="" />
             <h5>Permanent Staff</h5>
-            <Link to="/permanent-staff">
+            <Link to={`/permanent-staff/${id}`}>
               <button>
                 <p>CLICK HERE</p> <i className="fa-solid fa-caret-right"></i>
               </button>

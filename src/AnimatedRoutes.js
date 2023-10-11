@@ -85,11 +85,11 @@ const AnimatedRoutes = () => {
             element={<Wrapper childer={<PermanentJob />} />}
           />
           <Route
-            path="/casual-staff"
+            path="/casual-staff/:id"
             element={<Wrapper childer={<CasualStaff />} />}
           />
           <Route
-            path="/permanent-staff"
+            path="/permanent-staff/:staffId"
             element={<Wrapper childer={<PermanentStaff />} />}
           />
           <Route

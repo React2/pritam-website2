@@ -1,12 +1,16 @@
 /** @format */
-
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import FAQ from "../Component/Partial/Contact Us Components/FAQ";
 import { send_newsletter } from "../Repo/Api";
+import { useParams } from "react-router-dom";
 
 const CasualStaff = () => {
+  const { id } = useParams();
+  
+
   const [firstName, setFirstName] = useState(null);
   const [lastName, setLastName] = useState(null);
   const [phone, setPhone] = useState(null);
@@ -15,7 +19,24 @@ const CasualStaff = () => {
   const [interest, setInterest] = useState(null);
   const [date, setDate] = useState(null);
   const [slot, setSlot] = useState(null);
+  const [response, setResponse] = useState([]);
 
+
+  const getCasualStaff = async () => {
+    const fetch = await axios.get(
+      `https://pritam-backend.vercel.app/api/v1/admin/getstaffTalentedTypeById/${id}`
+    );
+    const responsedata = fetch.data;
+    console.log(responsedata.data)
+    setResponse(responsedata.data);
+
+  
+  }
+  
+  console.log("checkrouts")
+  useEffect(() => {
+    getCasualStaff();
+  }, []);
   const payload = {
     firstName,
     lastName,
@@ -55,22 +76,7 @@ const CasualStaff = () => {
       <div className="Banner">
         <div className="content">
           <h2>Casual Staff</h2>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras tempus
-            eleifend ullamcorper. Sed maximus nunc vitae metus pharetra, quis
-            pharetra felis iaculis. Aenean in nisl eget lorem congue efficitur
-            id ut orci. Mauris volutpat tortor non lectus rhoncus vestibulum
-            bibendum quis leo. Nulla lobortis feugiat nibh. Mauris pulvinar quam
-            nec lectus ornare, id auctor nulla venenatis. Duis sit amet rhoncus
-            lacus. Proin nisi dolor, posuere mattis viverra vel, dignissim et
-            augue. Suspendisse convallis nec neque et tincidunt. Vestibulum ante
-            ipsum primis in faucibus orci luctus et ultrices posuere cubilia
-            curae; Duis ut lectus pellentesque purus fermentum gravida. Integer
-            accumsan feugiat diam, quis elementum arcu ultricies non. In odio
-            ex, ultricies at urna eu, iaculis sagittis risus. Nulla eget
-            dignissim ipsum. Curabitur eget dignissim urna. Sed at purus quis
-            dolor lacinia consectetur
-          </p>
+          <p>{response.desc}</p>
         </div>
       </div>
 
@@ -79,51 +85,20 @@ const CasualStaff = () => {
       <div className="Community_Page">
         <div className="Find_work_contact_form">
           <div className="left_container">
-            <div className="content">
-              <h5>Our Services </h5>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras
-                tempus eleifend ullamcorper. Sed maximus nunc vitae metus
-                pharetra, quis pharetra felis iaculis. Aenean in nisl eget lorem
-                congue efficitur id ut orci. Mauris volutpat tortor non lectus
-                rhoncus vestibulum bibendum quis leo. Nulla lobortis feugiat
-                nibh. Mauris pulvinar quam nec lectus ornare, id auctor nulla
-                venenatis. Duis sit amet rhoncus lacus. Proin nisi dolor,
-                posuere mattis viverra vel, dignissim et augue.
-              </p>
-            </div>
-            <div className="content mt-5">
-              <h5>Front of House </h5>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras
-                tempus eleifend ullamcorper. Sed maximus nunc vitae metus
-                pharetra, quis pharetra felis iaculis. Aenean in nisl eget lorem
-                congue efficitur id ut orci. Mauris volutpat tortor non lectus
-                rhoncus vestibulum bibendum quis leo. Nulla lobortis feugiat
-                nibh. Mauris pulvinar quam nec lectus ornare, id auctor nulla
-                venenatis. Duis sit amet rhoncus lacus. Proin nisi dolor,
-                posuere mattis viverra vel, dignissim et augue.
-              </p>
-            </div>
-            <div className="content mt-5">
-              <h5>Back of House </h5>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras
-                tempus eleifend ullamcorper. Sed maximus nunc vitae metus
-                pharetra, quis pharetra felis iaculis. Aenean in nisl eget lorem
-                congue efficitur id ut orci. Mauris volutpat tortor non lectus
-                rhoncus vestibulum bibendum quis leo. Nulla lobortis feugiat
-                nibh. Mauris pulvinar quam nec lectus ornare, id auctor nulla
-                venenatis. Duis sit amet rhoncus lacus. Proin nisi dolor,
-                posuere mattis viverra vel, dignissim et augue.
-              </p>
-            </div>
+            {response?.description?.map((item) => {
+              return (
+                <div className="content">
+                  <h5>{item.title} </h5>
+                  <p>{item.desc}</p>
+                </div>
+              );
+            })}
           </div>
 
           <div className="right_container">
             <div className="content">
-              <h5>Contact Us</h5>
-              <p>Use the form below to get in touch.</p>
+              <h5>{response.contactUsformTitle}</h5>
+              <p>{response.contactUsformDesc}</p>
             </div>
             <div className="contact-query-form">
               <form onSubmit={submitHandler2}>
@@ -207,9 +182,7 @@ const CasualStaff = () => {
                     style={{ fontFamily: "Plus Jakarta Sans" }}
                     className="desc"
                   >
-                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                    diam nonumy Lorem ipsum dolor sit amet, consetetur
-                    sadipscing elitr, sed diam nonumy
+                    {response.contactUsformAvailibility}
                   </p>
                 </div>
 
@@ -241,8 +214,7 @@ const CasualStaff = () => {
                 </div>
 
                 <p className="Privacy">
-                  By submitting your details, you are giving us permission to
-                  contact you about our products and services..{" "}
+                  {response.contactUsformPrivacy}
                   <span>View our Privacy Policy</span> .
                 </p>
 
@@ -259,7 +231,7 @@ const CasualStaff = () => {
                 <div className="contact_Detail">
                   <p>Or Call us at </p>
                   <i className="fa-solid fa-phone"></i>
-                  <p>+44 1234567890</p>
+                  <p>{response.eformCall}</p>
                 </div>
               </form>
             </div>
@@ -272,14 +244,14 @@ const CasualStaff = () => {
         <iframe
           width="100%"
           height="500"
-          src="https://www.youtube.com/embed/JxZ9iqWVlSE?si=InTXwsXs3JbTwAMf&amp;start=3"
+          src={response?.youtubeLink}
           title="YouTube video player"
           frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowfullscreen
         ></iframe>
       </div>
-      
+
       <div
         className="About-Us_Newsletter"
         style={{ width: "100%", padding: "0" }}
@@ -292,13 +264,8 @@ const CasualStaff = () => {
           style={{ background: "#F5A302", width: "70%", padding: "10px" }}
         >
           <div className="content">
-            <h5>Sign up for our e-newsletter</h5>
-            <p className="desc">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Pellentesque mattis, neque laoreet porta imperdiet, ex dolor
-              accumsan enim, sed convallis ligula erat elementum tellus.
-              Maecenas eu convallis augue. Curabitur id a
-            </p>
+            <h5>{response.eTitle}</h5>
+            <p className="desc">{response.eDesc}</p>
 
             <form onSubmit={submitHandler}>
               <div className="Two_Inputs">
@@ -379,8 +346,7 @@ const CasualStaff = () => {
               </div>
 
               <p className="Policy">
-                By subscribing, you are giving us permission to contact you
-                about our products and services. You may unsubscribe at any time{" "}
+                {response.eformPrivacy}
                 <span>View our Privacy Policy</span> .
               </p>
 
@@ -398,13 +364,12 @@ const CasualStaff = () => {
             <div className="contact_Detail">
               <p>Or Call us at </p>
               <i className="fa-solid fa-phone"></i>
-              <p>+44 1234567890</p>
+              <p>{response.eformCall}</p>
             </div>
           </div>
         </div>
       </div>
 
-      
       <div className="pt-5"></div>
     </div>
   );

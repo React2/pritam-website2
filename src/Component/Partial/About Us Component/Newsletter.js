@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { send_newsletter } from "../../../Repo/Api";
 
-const Newsletter = () => {
+const Newsletter = ({ formTitle, formDesc }) => {
   const [firstName, setFirstName] = useState(null);
   const [lastName, setLastName] = useState(null);
   const [phone, setPhone] = useState(null);
@@ -38,12 +38,9 @@ const Newsletter = () => {
         style={{ background: "#F5A302", width: "70%", padding: "10px" }}
       >
         <div className="content">
-          <h5>Sign up for our e-newsletter</h5>
+          <h5>{formTitle}</h5>
           <p className="desc">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Pellentesque mattis, neque laoreet porta imperdiet, ex dolor
-            accumsan enim, sed convallis ligula erat elementum tellus. Maecenas
-            eu convallis augue. Curabitur id a
+            {formDesc}
           </p>
 
           <form onSubmit={submitHandler}>

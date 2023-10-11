@@ -73,8 +73,9 @@ export default function Bartending() {
 
   useEffect(() => {
     getBannerType("Bartending", setData);
-  }, []);
 
+  }, []);
+  console.log("bartending data",data)
   const filterData = response?.reverse()?.slice(0, 3);
 
   return (
@@ -89,13 +90,8 @@ export default function Bartending() {
         </div>
 
         <div className="bartending-options">
-          <h1>You will master the Subjects below</h1>
-          <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Libero
-            sequi nostrum rerum consequuntur placeat? Corrupti odio eaque
-            dolore. Quo natus nemo repellendus sunt magnam. Rem quos nihil quasi
-            deserunt, ab numquam aperiam cum expedita et.
-          </p>
+          <h1>{data?.bannerTitle}</h1>
+          <p>{data?.bannerDescription}</p>
         </div>
 
         <div className="bartending-collapse-div">

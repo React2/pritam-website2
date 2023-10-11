@@ -3,14 +3,31 @@
 import React, { useState, useEffect } from "react";
 import { Accordion } from "react-bootstrap";
 import { get_faq } from "../../../Repo/Api";
-
-const FAQ = () => {
+import axios from "axios";
+import { useParams } from "react-router-dom";
+const FAQ = ({type}) => {
   const [faq, setFaq] = useState([]);
-
   useEffect(() => {
     window.scrollTo(0, 0);
     get_faq(setFaq);
   }, []);
+  const getQuestionAndAns = async () => {
+    if (type == "Home") {
+      type = "Home";
+    } else {
+      type = "EventHome";
+    }
+
+
+  const response=await axios.get(`https://pritam-backend.vercel.app/api/v1/static/faq/All/${type}`)
+    const data = response.data;
+    setFaq(data.data)
+    console.log(data);
+  }
+  useEffect(() => {
+    getQuestionAndAns()
+  },[])
+
   return (
     <div className="contact-faq">
       <h5 style={{ fontFamily: "Plus Jakarta Sans" }}>

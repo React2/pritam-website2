@@ -51,7 +51,7 @@ export default function Footer() {
             <Link to="/about-us">About Us</Link>
             <Link to="/contact-us">Contact Us</Link>
             <Link to="/freelance">FAQ&#39;s</Link>
-            <Link to="/book-an-event/64b2a2b85ca7d30d3d269dc4#EventFaq">
+            <Link to="/book-an-event/64b2a2b85ca7d30d3d269dc4#EventFaq/EventHome">
               Event FAQ&#39;s
             </Link>
           </div>
