@@ -6,13 +6,14 @@ import { FaSearchengin } from "react-icons/fa";
 import { AiOutlineStar } from "react-icons/ai";
 import { BsLaptop } from "react-icons/bs";
 import { BiDrink } from "react-icons/bi";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../../store/store-context";
 import { HIDE_OVERLAY } from "../../store/action";
 import FindworkOver from "../linkcomponent/FindworkOver";
 import FindTalentedOver from "../linkcomponent/FindTalentedOver";
 import FreelancingOver from "../linkcomponent/FreelancingOver";
 import BartendingOver from "../linkcomponent/BartendingOver";
+import axios from "axios";
 
 export default function SideBar() {
   const [state, dispatch] = useContext(StoreContext);
@@ -21,7 +22,28 @@ export default function SideBar() {
   const [showWork1, setShowWork1] = useState(false);
   const [showWork2, setShowWork2] = useState(false);
   const [showWork3, setShowWork3] = useState(false);
+  const [allPagesDesc, setAllPageDesc] = useState([]);
+  const [talent, setTalent] = useState({});
+  const [work, setWork] = useState({});
+  const [Freelancing, setFreelancing] = useState({});
+  const [schoolForBartending, setSchoolForBartending] = useState({});
 
+
+  const fetchAllPageContent = async () => {
+    try {
+      const response = await axios.get(
+        `https://pritam-backend.vercel.app/api/v1/admin/page/getPageTitledescription`
+      );
+      const data = response.data;
+      setAllPageDesc(data.data)
+    } catch (error) {
+      
+    }
+  }
+  useEffect(() => {
+    fetchAllPageContent()
+  }, [])
+  
   const hideOverlay = () => {
     dispatch({ type: HIDE_OVERLAY });
   };
@@ -125,13 +147,20 @@ export default function SideBar() {
           className="para-div"
           style={{ position: "relative", minHeight: "400px" }}
         >
-          <p className="hoverLinkStyles" onClick={() => setShowWork(true)}>
+          <p
+            className="hoverLinkStyles"
+            onClick={() => setShowWork(true)}
+        
+          >
             <FaSearchengin className="smallIcons" />
             Find Work
           </p>
 
           {showWork === true ? (
-            <FindworkOver onHide={() => setShowWork(false)} />
+            <FindworkOver
+              onHide={() => setShowWork(false)}
+              pagedesc={allPagesDesc}
+            />
           ) : (
             ""
           )}
@@ -142,7 +171,10 @@ export default function SideBar() {
           </p>
 
           {showWork1 ? (
-            <FindTalentedOver onHide={() => setShowWork1(false)} />
+            <FindTalentedOver
+              onHide={() => setShowWork1(false)}
+              pagedesc={allPagesDesc}
+            />
           ) : (
             ""
           )}
@@ -152,7 +184,10 @@ export default function SideBar() {
           </p>
 
           {showWork2 ? (
-            <FreelancingOver onHide={() => setShowWork2(false)} />
+            <FreelancingOver
+              onHide={() => setShowWork2(false)}
+              pagedesc={allPagesDesc}
+            />
           ) : (
             ""
           )}
@@ -163,7 +198,10 @@ export default function SideBar() {
           </p>
 
           {showWork3 ? (
-            <BartendingOver onHide={() => setShowWork3(false)} />
+            <BartendingOver
+              onHide={() => setShowWork3(false)}
+              pagedesc={allPagesDesc}
+            />
           ) : (
             ""
           )}

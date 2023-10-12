@@ -19,15 +19,39 @@ const Staff = () => {
     const data = response.data;
     console.log("data", data);
     setResponse(data.data);
+    const youtubeVideoLink = data.data.youtubeLink;
+    console.log("youtubeLink", youtubeVideoLink);
+    const videoId = getVideoIdFromUrl(youtubeVideoLink);
+    if (videoId) {
+      console.log("Video ID:", videoId);
+      const videourl = `https://www.youtube.com/embed/${videoId}?si=InTXwsXs3JbTwAMf&amp;start=3`;
+      setResponse((prev) => {
+        return { ...prev, updateyoutubelink: videourl };
+      });
+    } else {
+      console.log("Invalid YouTube URL");
+    }
   } catch (error) {
     console.log(error)
   }
   }
+
+    function getVideoIdFromUrl(url) {
+      const regExp = /v=([a-zA-Z0-9_-]+)/;
+      const match = url.match(regExp);
+
+      if (match && match[1]) {
+        return match[1];
+      }
+
+      return null;
+    }
   const fetchTypeData = async () => {
     const fetchData = await axios.get(
       "https://pritam-backend.vercel.app/api/v1/admin/getstaffTalentedType"
     );
     setTypeResponse(fetchData.data.data);
+
   }
 
    useEffect(() => {
@@ -61,9 +85,9 @@ const Staff = () => {
 
   return (
     <>
-      <Banner 
-        staffId={response?._id}
-        id={typeResponse[0]?._id}
+      <Banner
+        stafftype={response?.staffTalentedTypeId}
+
       />
       <TrainingCourse
         academyHeading={response.academyHeading}
@@ -84,7 +108,7 @@ const Staff = () => {
         <iframe
           width="100%"
           height="500"
-          src={response.youtubeLink}
+          src={response.updateyoutubelink}
           title="YouTube video player"
           frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

@@ -1,10 +1,16 @@
 /** @format */
 
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const FindworkOver = (props) => {
   const navigate = useNavigate();
+  const [pageDesc, setPagedesc] = useState({});
+  props.map((item) => {
+    if (item.type == "FIND WORK") {
+      setPagedesc(item)
+    }
+  })
   return (
     <div
       className="Ham_Menu"
@@ -20,13 +26,11 @@ const FindworkOver = (props) => {
     >
       <div className="Desc">
         <div className="Close-Button">
-          <p className="title"> FIND WORK </p>
+          <p className="title"> {pageDesc?.title} </p>
           <i className="fa-solid fa-x" onClick={() => props.onHide()}></i>
         </div>
         <p className="desc">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam
+         {pageDesc?.desc}
         </p>
 
         <div className="buttons last_buttons">

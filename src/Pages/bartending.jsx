@@ -11,6 +11,7 @@ import {
 } from "../Repo/Api";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
+import axios from "axios";
 
 export default function Bartending() {
   const [response, setResponse] = useState([]);
@@ -27,12 +28,42 @@ export default function Bartending() {
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [lastDate, setLastDate] = useState(null);
   const [data, setData] = useState({});
-
+  const [bartendingData, setbartendingData] = useState({});
+  const [youtubeUpdatedLink,setUpdatedLink]=useState("")
   const tillDate = lastDate === null ? "" : `${lastDate}T23:59:59.000Z`;
 
   function handleDateChange(e) {
     const formattedDate = e.toISOString().split("T")[0];
     setLastDate(formattedDate);
+  }
+  const fetchBartendingData = async () => {
+    try {
+      const response = await axios.get(
+        `https://pritam-backend.vercel.app/api/v1/admin/Bartending/getBartending`
+      );
+      setbartendingData(response.data.data);
+      console.log("fetchBartendingData", response.data);
+      const youtubeVideoLink = response.data.data.youtubeLink;
+      console.log("youtubeLink", youtubeVideoLink);
+      const videoId = getVideoIdFromUrl(youtubeVideoLink);
+      if (videoId) {
+        console.log("Video ID:", videoId);
+        const videourl = `https://www.youtube.com/embed/${videoId}?si=InTXwsXs3JbTwAMf&amp;start=3`;
+       setUpdatedLink(videourl)
+      } else {
+        console.log("Invalid YouTube URL");
+      }
+    } catch (error) {}
+  };
+  function getVideoIdFromUrl(url) {
+    const regExp = /v=([a-zA-Z0-9_-]+)/;
+    const match = url.match(regExp);
+
+    if (match && match[1]) {
+      return match[1];
+    }
+
+    return null;
   }
 
   const fetchHandler = () => {
@@ -69,13 +100,13 @@ export default function Bartending() {
 
   useEffect(() => {
     fetchHandler();
+    fetchBartendingData();
   }, []);
 
   useEffect(() => {
     getBannerType("Bartending", setData);
-
   }, []);
-  console.log("bartending data",data)
+  console.log("bartending data", bartendingData);
   const filterData = response?.reverse()?.slice(0, 3);
 
   return (
@@ -89,10 +120,12 @@ export default function Bartending() {
           </div>
         </div>
 
-        <div className="bartending-options">
-          <h1>{data?.bannerTitle}</h1>
-          <p>{data?.bannerDescription}</p>
-        </div>
+        {bartendingData && (
+          <div className="bartending-options">
+            <h1>{bartendingData?.title}</h1>
+            <p>{bartendingData?.desc}</p>
+          </div>
+        )}
 
         <div className="bartending-collapse-div">
           {response?.map((i, index) => (
@@ -191,207 +224,207 @@ export default function Bartending() {
           </div>
         )}
 
-        <div className="About-Us_Newsletter">
-          <div class="left" style={{ width: "40%" }}>
-            <img
-              src="https://res.cloudinary.com/dbcnha741/image/upload/v1693814281/Rectangle_543_wos8b6.png"
-              alt=""
-            />
-          </div>
-          <div className="right">
-            <div className="content">
-              <h5>Book a Bartending Course</h5>
-              <p class="desc">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Praesent nisi lacus, cursus pharetra
-              </p>
+        {bartendingData && (
+          <div className="About-Us_Newsletter">
+            <div class="left" style={{ width: "40%" }}>
+              <img src={bartendingData.image} alt="" />
+            </div>
+            <div className="right">
+              <div className="content">
+                <h5>{bartendingData.contactUsformTitle}</h5>
+                <p class="desc">{bartendingData.contactUsformDesc}</p>
 
-              <form onSubmit={handleSubmit}>
-                <div className="Two_Inputs">
-                  <div>
-                    <label>
-                      <span>*</span>First Name
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      value={firstName}
-                      onChange={(e) => setFirstName(e.target.value)}
-                    />
+                <form onSubmit={handleSubmit}>
+                  <div className="Two_Inputs">
+                    <div>
+                      <label>
+                        <span>*</span>First Name
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        value={firstName}
+                        onChange={(e) => setFirstName(e.target.value)}
+                      />
+                    </div>
+
+                    <div>
+                      <label>
+                        <span>*</span>Last Name
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        value={lastName}
+                        onChange={(e) => setLastName(e.target.value)}
+                      />
+                    </div>
                   </div>
 
-                  <div>
-                    <label>
-                      <span>*</span>Last Name
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      value={lastName}
-                      onChange={(e) => setLastName(e.target.value)}
-                    />
+                  <div class="Single_Input">
+                    <div>
+                      <label>
+                        <span>*</span>Email Address
+                      </label>
+                      <input
+                        type="email"
+                        required
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                      />
+                    </div>
                   </div>
-                </div>
 
-                <div class="Single_Input">
-                  <div>
-                    <label>
-                      <span>*</span>Email Address
-                    </label>
-                    <input
-                      type="email"
-                      required
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                    />
+                  <div class="Single_Input">
+                    <div>
+                      <label>
+                        <span>*</span>Mobile Number
+                      </label>
+                      <input
+                        type="tel"
+                        maxLength={12}
+                        minLength={10}
+                        required
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
+                      />
+                    </div>
                   </div>
-                </div>
 
-                <div class="Single_Input">
-                  <div>
-                    <label>
-                      <span>*</span>Mobile Number
-                    </label>
-                    <input
-                      type="tel"
-                      maxLength={12}
-                      minLength={10}
-                      required
-                      value={phone}
-                      onChange={(e) => setPhone(e.target.value)}
-                    />
+                  <div class="Single_Input">
+                    <div>
+                      <label>Any Comments</label>
+                      <textarea
+                        placeholder="Type here........."
+                        required
+                        value={comment}
+                        onChange={(e) => setComment(e.target.value)}
+                      />
+                    </div>
                   </div>
-                </div>
 
-                <div class="Single_Input">
-                  <div>
-                    <label>Any Comments</label>
-                    <textarea
-                      placeholder="Type here........."
-                      required
-                      value={comment}
-                      onChange={(e) => setComment(e.target.value)}
-                    />
-                  </div>
-                </div>
-
-                <div class="Two_Inputs mt-2">
-                  <div style={{ width: "100%" }}>
-                    <label>
-                      {" "}
-                      <span>*</span> Availibility to Call Back
-                    </label>
-                    <p
-                      class="Policy"
-                      style={{ marginTop: "0", textAlign: "justify" }}
-                    >
-                      Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
-                      sed diam nonumy Lorem ipsum dolor sit amet, consetetur
-                      sadipscing elitr, sed diam nonumy
-                    </p>
-                  </div>
-                </div>
-
-                <Calendar value={date} onChange={(e) => setDate(e)} />
-
-                <div class="Single_Input">
-                  <div>
-                    <label>
-                      <span>*</span>Select Course
-                    </label>
-                    <select
-                      className="Full-width-select"
-                      onChange={(e) => setTrendingServiceId(e.target.value)}
-                      value={trendingServiceId}
-                    >
-                      <option></option>
-                      {response?.map((i, index) => (
-                        <option key={index} value={i._id}>
+                  {bartendingData && (
+                    <div class="Two_Inputs mt-2">
+                      <div style={{ width: "100%" }}>
+                        <label>
                           {" "}
-                          {i.title}{" "}
-                        </option>
-                      ))}
-                    </select>
+                          <span>*</span> Availibility to Call Back
+                        </label>
+                        <p
+                          class="Policy"
+                          style={{ marginTop: "0", textAlign: "justify" }}
+                        >
+                          {bartendingData.contactUsformAvaili}
+                        </p>
+                      </div>
+                    </div>
+                  )}
+
+                  <Calendar value={date} onChange={(e) => setDate(e)} />
+
+                  <div class="Single_Input">
+                    <div>
+                      <label>
+                        <span>*</span>Select Course
+                      </label>
+                      <select
+                        className="Full-width-select"
+                        onChange={(e) => setTrendingServiceId(e.target.value)}
+                        value={trendingServiceId}
+                      >
+                        <option></option>
+                        {response?.map((i, index) => (
+                          <option key={index} value={i._id}>
+                            {" "}
+                            {i.title}{" "}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
                   </div>
-                </div>
 
-                <div class="Single_Input">
-                  <div>
-                    <label>
-                      <span>*</span> Select your Slot &amp; Timings
-                    </label>
-                    <select
-                      className="Full-width-select"
-                      onChange={(e) => setSlot(e.target.value)}
-                      value={slot}
-                    >
-                      <option></option>
-                      <option value="1 PM">1 PM</option>
-                      <option value="2 PM">2 PM</option>
-                      <option value="3 PM">3 PM</option>
-                      <option value="4 PM">4 PM</option>
-                      <option value="5 PM">5 PM</option>
-                      <option value="6 PM">6 PM</option>
-                      <option value="7 PM">7 PM</option>
-                      <option value="8 PM">8 PM</option>
-                      <option value="9 PM">9 PM</option>
-                      <option value="10 PM">10 PM</option>
-                      <option value="11 PM">11 PM</option>
-                      <option value="12 PM">12 PM</option>
-                    </select>
+                  <div class="Single_Input">
+                    <div>
+                      <label>
+                        <span>*</span> Select your Slot &amp; Timings
+                      </label>
+                      <select
+                        className="Full-width-select"
+                        onChange={(e) => setSlot(e.target.value)}
+                        value={slot}
+                      >
+                        <option></option>
+                        <option value="1 PM">1 PM</option>
+                        <option value="2 PM">2 PM</option>
+                        <option value="3 PM">3 PM</option>
+                        <option value="4 PM">4 PM</option>
+                        <option value="5 PM">5 PM</option>
+                        <option value="6 PM">6 PM</option>
+                        <option value="7 PM">7 PM</option>
+                        <option value="8 PM">8 PM</option>
+                        <option value="9 PM">9 PM</option>
+                        <option value="10 PM">10 PM</option>
+                        <option value="11 PM">11 PM</option>
+                        <option value="12 PM">12 PM</option>
+                      </select>
+                    </div>
                   </div>
-                </div>
 
-                <p class="Policy" style={{ marginTop: "0" }}>
-                  about our products and services{" "}
-                  <span>View our Privacy Policy</span> .
-                </p>
+                  {bartendingData && (
+                    <p class="Policy" style={{ marginTop: "0" }}>
+                      {bartendingData.privacy}
+                    </p>
+                  )}
 
-                <button class="NewsLetter_Button" type="submit">
-                  SUBMIT
-                </button>
+                  <button class="NewsLetter_Button" type="submit">
+                    SUBMIT
+                  </button>
 
-                <p class="Assistance_P">Need Assistance?</p>
-                <button class="Whatsapp_Button">
-                  <i class="fa-brands fa-whatsapp"></i> CONTACT US AT WHATSAPP
-                </button>
+                  <p class="Assistance_P">Need Assistance?</p>
+                  {bartendingData && (
+                    <button class="Whatsapp_Button">
+                      <i class="fa-brands fa-whatsapp"></i>{" "}
+                      {bartendingData.contactUsformWhatApp}
+                    </button>
+                  )}
 
-                <div class="contact_Detail">
-                  <p>Or Call us at </p>
-                  <i class="fa-solid fa-phone"></i>
-                  <p>+44 1234567890</p>
-                </div>
-              </form>
+                  {bartendingData && (
+                    <div class="contact_Detail">
+                      <p>Or Call us at </p>
+                      <i class="fa-solid fa-phone"></i>
+                      <p>{bartendingData.contactUsformCall}</p>
+                    </div>
+                  )}
+                </form>
+              </div>
             </div>
           </div>
-        </div>
+        )}
 
         <div className="bartending-tc">
           <h1>Terms & Conditions</h1>
-          {terms?.map((i, index) => (
-            <p key={index}> {i.terms} </p>
-          ))}
+          {bartendingData && <p> {bartendingData.contactUsformTerms} </p>}
         </div>
 
         <div className="bartending-privacy-policy">
           <h1>Privacy Policy</h1>
-          {privacy?.map((i, index) => (
-            <p key={index}> {i.privacy} </p>
-          ))}
+          {bartendingData && <p> {bartendingData.contactUsformPrivacy} </p>}
         </div>
       </div>
 
-      <div style={{ width: "100%", margin: "40px auto" }}>
-        <iframe
-          width="100%"
-          height="500"
-          src="https://www.youtube.com/embed/JxZ9iqWVlSE?si=InTXwsXs3JbTwAMf&amp;start=3"
-          title="YouTube video player"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen
-        ></iframe>
-      </div>
+      {bartendingData && (
+        <div style={{ width: "100%", margin: "40px auto" }}>
+          <iframe
+            width="100%"
+            height="500"
+            src={youtubeUpdatedLink}
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+          ></iframe>
+        </div>
+      )}
 
       <div className="bartending-options" style={{ padding: "0" }}>
         <div className="Community_Page">

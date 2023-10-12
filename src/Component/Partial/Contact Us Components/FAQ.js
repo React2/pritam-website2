@@ -12,10 +12,10 @@ const FAQ = ({type}) => {
     get_faq(setFaq);
   }, []);
   const getQuestionAndAns = async () => {
-    if (type == "Home") {
-      type = "Home";
-    } else {
+    if (type == "EventHome") {
       type = "EventHome";
+    } else {
+      type = "Home";
     }
 
 

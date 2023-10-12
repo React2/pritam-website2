@@ -9,7 +9,6 @@ import { useParams } from "react-router-dom";
 
 const CasualStaff = () => {
   const { id } = useParams();
-  
 
   const [firstName, setFirstName] = useState(null);
   const [lastName, setLastName] = useState(null);
@@ -20,20 +19,36 @@ const CasualStaff = () => {
   const [date, setDate] = useState(null);
   const [slot, setSlot] = useState(null);
   const [response, setResponse] = useState([]);
-
-
+  const [youtubeLinkUpdated,setyoutubeLinkUpdated]=useState("")
   const getCasualStaff = async () => {
     const fetch = await axios.get(
       `https://pritam-backend.vercel.app/api/v1/admin/getstaffTalentedTypeById/${id}`
     );
     const responsedata = fetch.data;
-    console.log(responsedata.data)
+    console.log(responsedata.data);
     setResponse(responsedata.data);
+    const youtubeVideoLink = responsedata.data.youtubeLink;
+    console.log("youtubeLink", youtubeVideoLink);
+    const videoId = getVideoIdFromUrl(youtubeVideoLink);
+    if (videoId) {
+      console.log("Video ID:", videoId);
+      const videourl = `https://www.youtube.com/embed/${videoId}?si=InTXwsXs3JbTwAMf&amp;start=3`;
+      setyoutubeLinkUpdated(videourl);
+    } else {
+      console.log("Invalid YouTube URL");
+    }
+  };
+  function getVideoIdFromUrl(url) {
+    const regExp = /v=([a-zA-Z0-9_-]+)/;
+    const match = url.match(regExp);
 
-  
+    if (match && match[1]) {
+      return match[1];
+    }
+
+    return null;
   }
-  
-  console.log("checkrouts")
+  console.log("checkrouts", response);
   useEffect(() => {
     getCasualStaff();
   }, []);
@@ -66,7 +81,6 @@ const CasualStaff = () => {
     send_newsletter(payload);
   };
 
-  
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -75,7 +89,7 @@ const CasualStaff = () => {
       {/* Banner */}
       <div className="Banner">
         <div className="content">
-          <h2>Casual Staff</h2>
+          <h2>{response.title}</h2>
           <p>{response.desc}</p>
         </div>
       </div>
@@ -244,7 +258,7 @@ const CasualStaff = () => {
         <iframe
           width="100%"
           height="500"
-          src={response?.youtubeLink}
+          src={youtubeLinkUpdated}
           title="YouTube video player"
           frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -257,7 +271,7 @@ const CasualStaff = () => {
         style={{ width: "100%", padding: "0" }}
       >
         <div className="left">
-          <img src="./Image/87.png" alt="" />
+          <img src={response.eformImage} alt="" />
         </div>
         <div
           className="right"
@@ -358,7 +372,7 @@ const CasualStaff = () => {
             <p className="Assistance_P">Need Assistance?</p>
 
             <button className="Whatsapp_Button">
-              <i className="fa-brands fa-whatsapp"></i> CONTACT US AT WHATSAPP
+              <i className="fa-brands fa-whatsapp"></i> {response.eformWhatApp}
             </button>
 
             <div className="contact_Detail">

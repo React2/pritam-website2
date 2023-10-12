@@ -1,9 +1,15 @@
 /** @format */
 
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const BartendingOver = (props) => {
+   const [pageDesc, setPagedesc] = useState({});
+   props.map((item) => {
+     if (item.type == "FIND TALENT") {
+       setPagedesc(item);
+     }
+   });
   const navigate = useNavigate();
   return (
     <div
@@ -19,15 +25,11 @@ const BartendingOver = (props) => {
     >
       <div className="Desc">
         <div className="Close-Button">
-          <p className="title"> SCHOOL FOR BARTENDING </p>
+          <p className="title"> {pageDesc.title}</p>
           <i className="fa-solid fa-x" onClick={() => props.onHide()}></i>
         </div>
 
-        <p className="desc">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam
-        </p>
+        <p className="desc">{pageDesc.desc}</p>
 
         <div className="buttons last_buttons">
           <button
