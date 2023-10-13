@@ -40,7 +40,7 @@ const AnimatedRoutes = () => {
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<Wrapper childer={<HomePage />} />} />
           <Route path="/ads/:id" element={<AdScreen />} />
-          <Route 
+          <Route
             path="/bartending"
             element={<Wrapper childer={<Bartending />} />}
           />
@@ -102,7 +102,6 @@ const AnimatedRoutes = () => {
           />
 
           <Route path="/whoWeAre/:id" element={<WhoWeAre />} />
-
         </Routes>
       </AnimatePresence>
     </>

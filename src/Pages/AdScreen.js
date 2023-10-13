@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 const AdScreen = () => {
   const { id } = useParams();
   const [data, setData] = useState({});
+    const [youtubeVideo, setYoutubeVideo] = useState("");
 
   const fetchHandler = async () => {
     try {
@@ -14,8 +15,32 @@ const AdScreen = () => {
         `https://pritam-backend.vercel.app/api/v1/admin/getAdsById/${id}`
       );
       setData(data.data);
+           const youtubeVideoLink = data.data.link;
+      const videoId = getVideoIdFromUrl(youtubeVideoLink); 
+      if (videoId) {
+        console.log("Video ID:", videoId);
+        const videourl = `https://www.youtube.com/embed/${videoId}?si=InTXwsXs3JbTwAMf&amp;start=3`;
+        setYoutubeVideo(videourl);
+        setData((prev) => {
+
+          return { ...prev, "updateyoutubelink": videourl }
+      
+        })
+      }
     } catch {}
-  };
+    };
+    
+     function getVideoIdFromUrl(url) {
+  
+    const regExp = /v=([a-zA-Z0-9_-]+)/;
+    const match = url.match(regExp);
+
+    if (match && match[1]) {
+      return match[1];
+    }
+
+    return null;
+  }
 
   useEffect(() => {
     fetchHandler();
@@ -64,11 +89,12 @@ const AdScreen = () => {
         </div>
       </div>
 
+  
       <div style={{ width: "90%", margin: "40px auto" }}>
         <iframe
-          width="100%"
-          height="500"
-          src="https://www.youtube.com/embed/JxZ9iqWVlSE?si=InTXwsXs3JbTwAMf&amp;start=3"
+          width="80%"
+          height="400"
+          src={youtubeVideo}
           title="YouTube video player"
           frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

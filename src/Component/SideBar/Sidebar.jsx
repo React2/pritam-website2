@@ -36,6 +36,17 @@ export default function SideBar() {
       );
       const data = response.data;
       setAllPageDesc(data.data)
+      data.data.map((item) => {
+        if (item.page == "FIND TALENT") {
+          setTalent(item);
+        } else if (item.page == "FIND WORK") {
+          setWork(item);
+        } else if (item.page == "FREELANCING") {
+          setFreelancing(item);
+        } else if (item.page == "SCHOOL FOR BARTENDING") {
+          setSchoolForBartending(item);
+        }
+      })
     } catch (error) {
       
     }
@@ -147,20 +158,13 @@ export default function SideBar() {
           className="para-div"
           style={{ position: "relative", minHeight: "400px" }}
         >
-          <p
-            className="hoverLinkStyles"
-            onClick={() => setShowWork(true)}
-        
-          >
+          <p className="hoverLinkStyles" onClick={() => setShowWork(true)}>
             <FaSearchengin className="smallIcons" />
             Find Work
           </p>
 
           {showWork === true ? (
-            <FindworkOver
-              onHide={() => setShowWork(false)}
-              pagedesc={allPagesDesc}
-            />
+            <FindworkOver onHide={() => setShowWork(false)} pagedesc={work} />
           ) : (
             ""
           )}
@@ -173,7 +177,7 @@ export default function SideBar() {
           {showWork1 ? (
             <FindTalentedOver
               onHide={() => setShowWork1(false)}
-              pagedesc={allPagesDesc}
+              pagedesc={talent}
             />
           ) : (
             ""
@@ -186,7 +190,7 @@ export default function SideBar() {
           {showWork2 ? (
             <FreelancingOver
               onHide={() => setShowWork2(false)}
-              pagedesc={allPagesDesc}
+              pagedesc={Freelancing}
             />
           ) : (
             ""
@@ -200,7 +204,7 @@ export default function SideBar() {
           {showWork3 ? (
             <BartendingOver
               onHide={() => setShowWork3(false)}
-              pagedesc={allPagesDesc}
+              pagedesc={schoolForBartending}
             />
           ) : (
             ""

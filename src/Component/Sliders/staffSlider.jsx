@@ -77,14 +77,14 @@ export default function StaffSlider() {
           return (
             <SwiperSlide key={index}>
               <div className="staff-slider-card">
-                <img src={item.userId?.image} className="staff-slider-image" alt="" />
+                <img src={item?.userId?.image} className="staff-slider-image" alt="" />
                 <div style={{ padding: "10px" }}>
                   <p className="staff-slider-para">{item.comment}</p>
                   <div className="staff-slider-div">
-                    <img src={item.userId?.image} alt=""></img>
+                    <img src={item?.userId?.image} alt=""></img>
                     <div className="staff-info">
-                      <h3>{item.userId?.firstName +" " + item.userId?.lastName}</h3>
-                      <p>{item.type}</p>
+                      <h3>{item?.userId?.firstName +" " + item?.userId?.lastName}</h3>
+                      <p>{item?.type}</p>
                     </div>
                   </div>
                 </div>

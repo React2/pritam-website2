@@ -4,12 +4,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const BartendingOver = (props) => {
-   const [pageDesc, setPagedesc] = useState({});
-   props.map((item) => {
-     if (item.type == "FIND TALENT") {
-       setPagedesc(item);
-     }
-   });
+  
   const navigate = useNavigate();
   return (
     <div
@@ -20,16 +15,16 @@ const BartendingOver = (props) => {
         left: 0,
         zIndex: 200,
         background: "#f5a302",
-        height: "90%",
+        height: "95%",
       }}
     >
       <div className="Desc">
         <div className="Close-Button">
-          <p className="title"> {pageDesc.title}</p>
+          <p className="title"> {props?.pagedesc?.title}</p>
           <i className="fa-solid fa-x" onClick={() => props.onHide()}></i>
         </div>
 
-        <p className="desc">{pageDesc.desc}</p>
+        <p className="desc">{props?.pagedesc?.desc}</p>
 
         <div className="buttons last_buttons">
           <button

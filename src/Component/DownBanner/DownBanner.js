@@ -15,10 +15,10 @@ const DownBanner = ({ setshow }) => {
     <div className="AddScreeenBg">
       <div className="AddScreeen">
         <i className="fa-solid fa-close" onClick={() => setshow(false)} />
-        <img src={data?.image} alt="" />
+        <img src={data?.banner} alt="" />
         <p>{data?.title}</p>
 
-        <Link to={`/ads/${data?._id }`}>
+        <Link to={`/ads/${data?._id}`}>
           <button>VIEW DETAILS</button>
         </Link>
       </div>

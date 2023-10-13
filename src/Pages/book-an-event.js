@@ -57,6 +57,8 @@ const BookAnEvent = () => {
     get_sub_event(id, setEvent);
   }, []);
 
+
+  console.log("event", event);
   return (
     <>
       <EventModal

@@ -5,12 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const FindworkOver = (props) => {
   const navigate = useNavigate();
-  const [pageDesc, setPagedesc] = useState({});
-  props.map((item) => {
-    if (item.type == "FIND WORK") {
-      setPagedesc(item)
-    }
-  })
+ 
   return (
     <div
       className="Ham_Menu"
@@ -26,12 +21,10 @@ const FindworkOver = (props) => {
     >
       <div className="Desc">
         <div className="Close-Button">
-          <p className="title"> {pageDesc?.title} </p>
+          <p className="title"> {props?.pagedesc?.title} </p>
           <i className="fa-solid fa-x" onClick={() => props.onHide()}></i>
         </div>
-        <p className="desc">
-         {pageDesc?.desc}
-        </p>
+        <p className="desc">{props?.pagedesc?.desc}</p>
 
         <div className="buttons last_buttons">
           <button
