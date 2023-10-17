@@ -210,16 +210,6 @@ const Baseurl = "https://pritam-backend.vercel.app/";
       </div>
 
       <div style={{ height: "100px" }}></div>
-      <div className="free6">
-        <h2>Top Businesses looking to Hire Freelancers</h2>
-        <div className="free7" style={{ alignItems: "center" }}>
-          <img src="./Image/103.png" alt="" style={{ width: "100px" }} />
-          <img src="./Image/104.png" alt="" style={{ width: "100px" }} />
-          <img src="./Image/105.png" alt="" style={{ width: "100px" }} />
-          <img src="./Image/106.png" alt="" style={{ width: "100px" }} />
-          <img src="./Image/107.png" alt="" style={{ width: "100px" }} />
-        </div>
-      </div>
       <div className="Community_Page" style={{ marginBottom: "60px" }}>
         <FAQ />
       </div>

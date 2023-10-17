@@ -11,7 +11,7 @@ const Staff = () => {
  
   const [response, setResponse] = useState([]);
   const [typeResponse, setTypeResponse] = useState([]);
-  
+  const [openLearnMore, setOpenLearnMore] = useState(false);
 
   const fetchDataAgain = async()=>{
   try {
@@ -85,18 +85,18 @@ const Staff = () => {
 
   return (
     <>
-      <Banner
-        stafftype={response?.staffTalentedTypeId}
-
-      />
+      <Banner stafftype={response?.staffTalentedTypeId} />
       <TrainingCourse
         academyHeading={response.academyHeading}
         academyDesc={response.academyDesc}
         academyTitle={response.academyTitle}
         image={response.image}
+        setOpenLearnMore={setOpenLearnMore}
       />
-      <HeadingCont title={"Consultancy"} content={""} />
-      {response?.consultancy?.map((item) => {
+      {openLearnMore && (
+        <HeadingCont title={"We Add Academic Hospitality"} content={""} />
+      )}
+      {openLearnMore  && response?.consultancy?.map((item) => {
         return (
           <div className="Staff_Desc">
             <h5>{item.title}</h5>

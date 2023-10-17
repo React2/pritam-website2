@@ -27,8 +27,13 @@ export default function SideBar() {
   const [work, setWork] = useState({});
   const [Freelancing, setFreelancing] = useState({});
   const [schoolForBartending, setSchoolForBartending] = useState({});
-
-
+  const [logo,setLogo]=useState()
+  const fetchLogo = async () => {
+  const data  =await axios.get(
+    "https://pritam-backend.vercel.app/api/v1/admin/viewContactDetails"
+    );
+    setLogo(data.data.data);
+}
   const fetchAllPageContent = async () => {
     try {
       const response = await axios.get(
@@ -53,6 +58,7 @@ export default function SideBar() {
   }
   useEffect(() => {
     fetchAllPageContent()
+    fetchLogo()
   }, [])
   
   const hideOverlay = () => {
@@ -66,7 +72,7 @@ export default function SideBar() {
       <div className="sideBarContainer" onClick={hideOverlay}>
         <div className="logoContainer">
           <Link to="/">
-            <img src="/Image/9.png" alt="logo" />
+            <img src={logo?.image} alt="logo" />
           </Link>
 
           <RxHamburgerMenu

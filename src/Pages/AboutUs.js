@@ -5,6 +5,7 @@ import Banner from "../Component/Partial/About Us Component/Banner";
 import ContentDescription from "../Component/Partial/About Us Component/content-description";
 import TwoSection from "../Component/Partial/About Us Component/two-section";
 import { getBannerType, get_about_us, send_newsletter } from "../Repo/Api";
+import axios from "axios";
 
 const AboutUs = () => {
   const [about, setAbout] = useState([]);
@@ -15,7 +16,43 @@ const AboutUs = () => {
   const [nearestRegion, setNearestRegion] = useState(null);
   const [interest, setInterest] = useState(null);
   const [data, setData] = useState({});
+    const [response, setResponse] = useState();
+ const fetchData = async () => {
+   try {
+     const { data } = await axios.get(
+       `https://pritam-backend.vercel.app/api/v1/admin/Bartending/getFormData/aboutUs`
+     );
+     console.log("datacontact", data);
+     setResponse(data.data);
+     const youtubeVideoLink = data.data.youtubeLink;
+     console.log("youtubeLink", youtubeVideoLink);
+     const videoId = getVideoIdFromUrl(youtubeVideoLink);
+     if (videoId) {
+       console.log("Video ID:", videoId);
+       const videourl = `https://www.youtube.com/embed/${videoId}?si=InTXwsXs3JbTwAMf&amp;start=3`;
+       setResponse((prev) => {
+         return { ...prev, updateyoutubelink: videourl };
+       });
+     } else {
+       console.log("Invalid YouTube URL");
+     }
+   } catch (error) {}
+  };
+  
+  function getVideoIdFromUrl(url) {
+    const regExp = /v=([a-zA-Z0-9_-]+)/;
+    const match = url.match(regExp);
 
+    if (match && match[1]) {
+      return match[1];
+    }
+
+    return null;
+  }
+ useEffect(() => {
+   fetchData();
+ }, []);
+ console.log("aboutformdata", about?.desc);
   useEffect(() => {
     getBannerType("About Us", setData);
   }, []);
@@ -54,16 +91,23 @@ const AboutUs = () => {
         </div>
       </div>
 
-      {about[0]?.desc?.map((ele, i) => (
-        <ContentDescription title={ele?.title} desc={ele?.desc} key={i} />
-      ))}
-      <TwoSection title={about?.[0]?.title} />
+      {about?.desc?.map((ele, i) => 
+        {
+          if(i<= 2){
+        return(
+               <ContentDescription title={ele?.title} desc={ele?.desc} key={i} />
+            )
+          }
+        }
+       
+      )}
+      <TwoSection title={about?.title} />
 
       <div style={{ width: "90%", margin: "40px auto" }}>
         <iframe
           width="100%"
           height="500"
-          src="https://www.youtube.com/embed/JxZ9iqWVlSE?si=InTXwsXs3JbTwAMf&amp;start=3"
+          src={response?.updateyoutubelink}
           title="YouTube video player"
           frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -83,12 +127,9 @@ const AboutUs = () => {
           style={{ background: "#F5A302", width: "70%", padding: "10px" }}
         >
           <div className="content">
-            <h5>Sign up for our e-newsletter</h5>
+            <h5>{response?.contactUsformTitle}</h5>
             <p className="desc" style={{ textAlign: "justify" }}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Pellentesque mattis, neque laoreet porta imperdiet, ex dolor
-              accumsan enim, sed convallis ligula erat elementum tellus.
-              Maecenas eu convallis augue. Curabitur id a
+              {response?.contactUsformDesc}
             </p>
 
             <form onSubmit={submitHandler}>
@@ -170,9 +211,8 @@ const AboutUs = () => {
               </div>
 
               <p className="Policy">
-                By subscribing, you are giving us permission to contact you
-                about our products and services. You may unsubscribe at any time{" "}
-                <span>View our Privacy Policy</span> .
+                {response?.contactUsformTerms}
+                <span> {response?.contactUsformPrivacy}</span> .
               </p>
 
               <button className="NewsLetter_Button" type="submit">
@@ -183,13 +223,14 @@ const AboutUs = () => {
             <p className="Assistance_P">Need Assistance?</p>
 
             <button className="Whatsapp_Button">
-              <i className="fa-brands fa-whatsapp"></i> CONTACT US AT WHATSAPP
+              <i className="fa-brands fa-whatsapp"></i>{" "}
+              {response?.contactUsformWhatApp}
             </button>
 
             <div className="contact_Detail">
               <p>Or Call us at </p>
               <i className="fa-solid fa-phone"></i>
-              <p>+44 1234567890</p>
+              <p>{response?.contactUsformCall}</p>
             </div>
           </div>
         </div>

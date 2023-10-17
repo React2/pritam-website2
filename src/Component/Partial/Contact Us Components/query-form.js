@@ -1,9 +1,10 @@
 /** @format */
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { eventEnquiry } from "../../../Repo/Api";
+import axios from "axios";
 
 const Queryform = () => {
   const [firstName, setFirstName] = useState(null);
@@ -13,7 +14,23 @@ const Queryform = () => {
   const [comment, setComment] = useState(null);
   const [date, setDate] = useState(null);
   const [slot, setSlot] = useState(null);
-
+  const [response, setResponse] = useState();
+  const fetchData = async () => {
+    try {
+        const { data } = await axios.get(
+          `https://pritam-backend.vercel.app/api/v1/admin/Bartending/getFormData/contactus`
+      );
+      console.log("datacontact",data)
+        setResponse(data.data);
+        
+    } catch (error) {
+      
+    }
+  }
+  useEffect(() => {
+  fetchData()
+  }, [])
+  console.log("contactusFormData", response);
   const payload = {
     firstName,
     lastName,
@@ -37,12 +54,8 @@ const Queryform = () => {
   };
   return (
     <div className="contact-query-form">
-      <h5 className="head">Any more queries?</h5>
-      <p className="desc">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras tempus
-        eleifend ullamcorper. Sed maximus nunc vitae metus pharetra, quis
-        pharetra felis iaculis. Aenean in nisl eget lorem congue effic
-      </p>
+      <h5 className="head">{response?.contactUsformTitle}</h5>
+      <p className="desc">{response?.contactUsformDesc}</p>
 
       <form onSubmit={handleSubmit}>
         <div className="two-inputs">
@@ -113,11 +126,7 @@ const Queryform = () => {
           <p>
             <span>*</span>Availibility to Call Back
           </p>
-          <p className="desc">
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-            diam nonumy
-          </p>
+          <p className="desc">{response?.contactUsformAvaili}</p>
         </div>
         <Calendar onChange={(e) => setDate(e)} value={date} />
 
@@ -147,9 +156,8 @@ const Queryform = () => {
         </div>
 
         <p className="Privacy">
-          By submitting your details, you are giving us permission to contact
-          you about our products and services..{" "}
-          <span>View our Privacy Policy</span> .
+          {response?.contactUsformTerms}
+          <span>{response?.contactUsformPrivacy}</span> .
         </p>
 
         <button className="submit-btn" type="submit">
@@ -158,13 +166,14 @@ const Queryform = () => {
 
         <p className="assistance">Need Assistance?</p>
         <button className="Whatsapp_Button">
-          <i className="fa-brands fa-whatsapp"></i> CONTACT US AT WHATSAPP
+          <i className="fa-brands fa-whatsapp"></i>{" "}
+          {response?.contactUsformWhatApp}
         </button>
 
         <div className="contact_Detail">
           <p>Or Call us at </p>
           <i className="fa-solid fa-phone"></i>
-          <p>+44 1234567890</p>
+          <p>{response?.contactUsformCall}</p>
         </div>
       </form>
     </div>

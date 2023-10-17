@@ -7,6 +7,7 @@ import HeadingCont from "../Component/Partial/heading-cont";
 import { eventEnquiry } from "../Repo/Api";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
+import axios from "axios";
 
 const FindWork = () => {
   const [firstName, setFirstName] = useState(null);
@@ -17,6 +18,7 @@ const FindWork = () => {
   const [interest, setInterest] = useState(null);
   const [date, setDate] = useState(null);
   const [slot, setSlot] = useState(null);
+  const [response, setResponse] = useState();
 
   const payload = {
     firstName,
@@ -28,7 +30,42 @@ const FindWork = () => {
     date,
     slot,
   };
+ const fetchData = async () => {
+   try {
+     const { data } = await axios.get(
+       `https://pritam-backend.vercel.app/api/v1/admin/Bartending/getFormData/findWork`
+     );
+     console.log("datacontact", data);
+     setResponse(data.data);
+      const youtubeVideoLink = data.data.youtubeLink;
+      console.log("youtubeLink", youtubeVideoLink);
+      const videoId = getVideoIdFromUrl(youtubeVideoLink);
+      if (videoId) {
+        console.log("Video ID:", videoId);
+        const videourl = `https://www.youtube.com/embed/${videoId}?si=InTXwsXs3JbTwAMf&amp;start=3`;
+       setResponse((prev) => {
+         return { ...prev, updateyoutubelink: videourl };
+       });
+      } else {
+        console.log("Invalid YouTube URL");
+      }
+      
+   } catch (error) {}
+  };
+  
+   function getVideoIdFromUrl(url) {
+     const regExp = /v=([a-zA-Z0-9_-]+)/;
+     const match = url.match(regExp);
 
+     if (match && match[1]) {
+       return match[1];
+     }
+
+     return null;
+   }
+ useEffect(() => {
+   fetchData();
+ }, []);
   const submitHandler = (e) => {
     e.preventDefault();
     eventEnquiry(payload);
@@ -50,22 +87,20 @@ const FindWork = () => {
         className="Find_work_contact_form contsc_work_form_2"
         style={{ justifyContent: "space-evenly" }}
       >
-        <div className="left_container">
-          <div className="content" style={{ padding: "10px" }}>
-            <h5 style={{ fontSize: "28px" }}>
-              Lorem ipsum dolor sit amet, consectetur
-            </h5>
-            <p style={{ maxWidth: "100%" }}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
-              tempor dignissim elementum. Suspendisse quis enim aliquet dui
-              efficitur ultricies nec id nisi. Donec at odio condimentum neque
-              imperdiet molestie. Mauris nec
-            </p>
-          </div>
+        <div
+          className="left_container"
+          style={{ backgroundImage: `url(${response?.image})` }}
+        >
+          <div
+            className="content"
+            style={{ marginLeft: "10px", color: "white" }}
+          ></div>
         </div>
 
         <div className="right_container">
-          <div className="contact-query-form">
+          <div className="contact-query-form ">
+            <h5 className="head">{response?.contactUsformTitle}</h5>
+            <p className="desc">{response?.contactUsformDesc}</p>
             <form onSubmit={submitHandler}>
               <div className="two-inputs">
                 <div>
@@ -144,9 +179,7 @@ const FindWork = () => {
                   <span>*</span>Availibility to Call Back
                 </p>
                 <p style={{ fontFamily: "Plus Jakarta Sans" }} className="desc">
-                  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                  diam nonumy Lorem ipsum dolor sit amet, consetetur sadipscing
-                  elitr, sed diam nonumy
+                  {response?.contactUsformAvaili}
                 </p>
               </div>
 
@@ -178,9 +211,8 @@ const FindWork = () => {
               </div>
 
               <p className="Privacy">
-                By submitting your details, you are giving us permission to
-                contact you about our products and services..{" "}
-                <span>View our Privacy Policy</span> .
+                {response?.contactUsformTerms}
+                <span> {response?.contactUsformPrivacy}</span> .
               </p>
 
               <button className="submit-btn" type="submit">
@@ -189,13 +221,14 @@ const FindWork = () => {
 
               <p className="assistance">Need Assistance?</p>
               <button className="Whatsapp_Button">
-                <i className="fa-brands fa-whatsapp"></i> CONTACT US AT WHATSAPP
+                <i className="fa-brands fa-whatsapp"></i>{" "}
+                {response?.contactUsformWhatApp}
               </button>
 
               <div className="contact_Detail">
                 <p>Or Call us at </p>
                 <i className="fa-solid fa-phone"></i>
-                <p>+44 1234567890</p>
+                <p>{response?.contactUsformCall}</p>
               </div>
             </form>
           </div>
@@ -214,7 +247,7 @@ const FindWork = () => {
         <iframe
           width="100%"
           height="500"
-          src="https://www.youtube.com/embed/JxZ9iqWVlSE?si=InTXwsXs3JbTwAMf&amp;start=3"
+          src={response?.updateyoutubelink}
           title="YouTube video player"
           frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

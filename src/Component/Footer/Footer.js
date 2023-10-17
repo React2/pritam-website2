@@ -9,34 +9,42 @@ import { BsTwitter } from "react-icons/bs";
 import { BsInstagram } from "react-icons/bs";
 import { useEffect, useState } from "react";
 import { get_contact_detail, getSocialLinks } from "../../Repo/Api";
+import axios from "axios";
 
 export default function Footer() {
   const [detail, setDetail] = useState([]);
   const [response, setResponse] = useState({});
-
+ const [logo, setLogo] = useState();
+ const fetchLogo = async () => {
+   const data  =await axios.get(
+     "https://pritam-backend.vercel.app/api/v1/admin/viewContactDetails"
+   );
+   console.log("logodata",data)
+   setLogo(data.data.data);
+ };
   useEffect(() => {
     get_contact_detail(setDetail);
     getSocialLinks(setResponse);
+    fetchLogo();
   }, []);
-
+  console.log("detailsofooter",detail)
   return (
     <footer className="app-footer">
       <div className="app-footer-content">
         <div className="footer-container">
-          <div className="footer-logo-container">
-            <img src="/Image/9.png" alt="" />
-            <p>{detail?.[0]?.description?.slice(0, 150)}</p>
+          <div className="footer-logo-container .logoContainer">
+            <img src={logo?.image} alt="" style={{ width: "" }} />
           </div>
 
           <div className="footer-contact-info-div">
             <p>
-              <BsTelephoneFill /> {detail?.[0]?.mobileNumber}
+              <BsTelephoneFill /> {response?.mobileNumber}
             </p>
             <p>
-              <IoMdMail /> {detail?.[0]?.email}
+              <IoMdMail /> {response?.email}
             </p>
             <p>
-              <MdLocationOn /> {detail?.[0]?.address}
+              <MdLocationOn /> {response?.address}
             </p>
           </div>
 
@@ -61,10 +69,18 @@ export default function Footer() {
               <a href={response?.fb} target="_blank" style={{ color: "#fff" }}>
                 <FaFacebookF />
               </a>
-              <a href={response?.twitter} target="_blank"  style={{ color: "#fff" }}>
+              <a
+                href={response?.twitter}
+                target="_blank"
+                style={{ color: "#fff" }}
+              >
                 <BsTwitter />
               </a>
-              <a href={response?.instagram} target="_blank"  style={{ color: "#fff" }}>
+              <a
+                href={response?.instagram}
+                target="_blank"
+                style={{ color: "#fff" }}
+              >
                 <BsInstagram />
               </a>
             </div>

@@ -1,20 +1,41 @@
 /** @format */
 
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 
 const TwoSection = ({ title }) => {
+  const [data, setData] = useState();
+  const Baseurl = "https://pritam-backend.vercel.app/";
+
+  const fetchData = async() => { 
+         const data  = await axios.get(`${Baseurl}api/v1/static/getAboutUs`);
+         setData(data.data.data);
+  }
+  useEffect(() => {
+    fetchData()
+  },[])
+console.log("dataoftwoline",data)
+
   return (
     <div className="About_Us-two_Sec">
       <div className="left">
-        <img src="./Image/7.png" alt="" />
+      <img src={data?.image} alt="" />
       </div>
-      <div className="right">
-        <p style={{ textAlign: "justify" }}>
-          {title
-            ? title
-            : " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras tempus   eleifend ullamcorper. Sed maximus nunc vitae metus pharetra, quis  pharetra felis iaculis. Aenean in nisl eget lorem congue efficitur id    ut orci. Mauris volutpat tortor non lectus rhoncus vestibulum bibendum  quis leo. Nulla lobortis feugiat nibh. Mauris pulvinar quam nec lectus  ornare, id auctor nulla venenatis. Duis sit amet rhoncus lacus. Proin   nisi dolor, posuere mattis viverra vel, dignissim et augue.  Suspendisse convallis nec neque et tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae Pellentesque habitant morbi tristique senectus et netus et malesuada  fames ac turpis egestas. Nulla ultricies diam et felis ornare, sit amet posuere eros blandit. Praesent nunc urna, pharetra non mauris  consectetur, aliquam vestibulum nisi. Mauris tellus lectus, ultricies  non quam ."}
-        </p>
-      </div>
+  <div className="right">
+        {data?.desc && data?.desc?.map((item, i) => {
+             if (i > 2) {
+               return (
+                 <>
+                   <h5>{item?.title}</h5>
+                   <p style={{ textAlign: "justify" }}>{item?.desc}</p>
+                 </>
+               );
+             }
+        }
+       
+         
+        )}
+  </div>
     </div>
   );
 };

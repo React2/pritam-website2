@@ -6,7 +6,7 @@ import Queryform from "./query-form";
 
 const OverflowingContent = () => {
   const [response, setResponse] = useState([]);
-
+  const [contactData, setContactData] = useState("");
   const fetchHandler = async () => {
     try {
       const { data } = await axios.get(
@@ -15,16 +15,25 @@ const OverflowingContent = () => {
       setResponse(data.data);
     } catch {}
   };
-
+  const getContactDetails = async () => {
+    try {
+      const { data } = await axios.get(
+        "https://pritam-backend.vercel.app/api/v1/admin/viewContactDetails"
+      );
+      setContactData(data.data);
+    } catch {}
+  };
   useEffect(() => {
     fetchHandler();
+    getContactDetails();
   }, []);
-
+  
+  console.log("response", contactData);
   return (
     <div className="contact-us-overflow-main contact-us-overflow-main-2 ">
       <div className="Content">
         <div className="Main" style={{ justifyContent: "center" }}>
-          <h5 style={{ color: "#000" }}>Lorem Ipsum</h5>
+          <h5 style={{ color: "#000" }}>{contactData?.title}</h5>
         </div>
 
         <div
@@ -38,16 +47,7 @@ const OverflowingContent = () => {
               textAlign: "justify",
             }}
           >
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras tempus
-            eleifend ullamcorper. Sed maximus nunc vitae metus pharetra, quis
-            pharetra felis iaculis. Aenean in nisl eget lorem congue efficitur
-            id ut orci. Mauris volutpat tortor non lectus rhoncus vestibulum
-            bibendum quis leo. Nulla lobortis feugiat nibh. Mauris pulvinar quam
-            nec lectus ornare, id auctor nulla venenatis. Duis sit amet rhoncus
-            lacus. Proin nisi dolor, posuere mattis viverra vel, dignissim et
-            augue. Suspendisse convallis nec neque et tincidunt. Vestibulum ante
-            ipsum primis in faucibus orci luctus et ultrices posuere cubilia
-            curae;{" "}
+            {contactData?.description}
           </p>
         </div>
 

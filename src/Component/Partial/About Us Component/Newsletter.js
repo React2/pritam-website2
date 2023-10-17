@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { send_newsletter } from "../../../Repo/Api";
+import axios from "axios";
 
 const Newsletter = ({ formTitle, formDesc }) => {
   const [firstName, setFirstName] = useState(null);
@@ -19,6 +20,8 @@ const Newsletter = ({ formTitle, formDesc }) => {
     nearestRegion,
     interest,
   };
+
+ 
 
   const submitHandler = (e) => {
     e.preventDefault();

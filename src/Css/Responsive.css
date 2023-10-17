@@ -58,6 +58,7 @@
   }
   .Event_Booking-Banner .upper {
     max-height: 400px;
+    max-width: 100;
   }
 
   .Staff_Desc {
@@ -75,6 +76,25 @@
   }
   .casual-staff .Find_work_contact_form .right_container {
     width: 40%;
+  }
+
+   .Event_Booking-Banner .upper h5 {
+    font-size: 30px;
+    line-height: normal;
+  }
+  .Event_Booking-Banner .upper p {
+    margin-top: 10px;
+  }
+  .Event_Booking-Banner .down .main .content {
+    width: 400px;
+    height: 400px;
+  }
+  .Event_Booking-Banner .down .main .content h5 {
+    font-size: 30px;
+  }
+  .Event_Booking-Banner .down {
+    max-height: 400px;
+    min-height: 300px;
   }
 }
 
@@ -472,6 +492,10 @@
   }
   .Community_Page .Find_work_contact_form .left_container .content p {
     text-align: center;
+  }
+
+  .left_container{
+  max-height: 100%;
   }
 
   .Book-An-Event .Banner .content {
