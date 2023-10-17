@@ -26,7 +26,7 @@ console.log("dataoftwoline",data)
              if (i > 2) {
                return (
                  <>
-                   <h5>{item?.title}</h5>
+                   <h5 style={{ textAlign: "right" }}>{item?.title}</h5>
                    <p style={{ textAlign: "justify" }}>{item?.desc}</p>
                  </>
                );

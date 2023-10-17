@@ -2354,6 +2354,13 @@
   align-items: flex-end;
   flex-direction: column;
 }
+.About_Us-two_Sec .right h5 {
+   display: flex;
+   /* align-items: flex-start; */
+   width:80%;
+ 
+   left:10;
+}
 .About_Us-two_Sec .right p {
   max-width: 80%;
   color: #1d1d1d;
